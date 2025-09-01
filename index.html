@@ -3,839 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TypeScript ve JavaScript arasında Cypress test otomasyonu açısından detaylı karşılaştırma. Avantajlar, dezavantajlar ve kullanım önerileri.">
-    <meta name="keywords" content="TypeScript, JavaScript, Cypress, test automation, karşılaştırma, comparison">
-    <meta name="author" content="Cypress Comparison Guide">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="TypeScript vs JavaScript - Cypress Karşılaştırması">
-    <meta property="og:description" content="TypeScript ve JavaScript arasında Cypress test otomasyonu açısından detaylı karşılaştırma">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="TypeScript vs JavaScript - Cypress Karşılaştırması">
-    <meta name="twitter:description" content="TypeScript ve JavaScript arasında Cypress test otomasyonu açısından detaylı karşılaştırma">
-    <meta name="twitter:image" content="https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg">
-    
     <title>TypeScript vs JavaScript - Cypress Karşılaştırması</title>
-    
     <style>
-        :root {
-            /* Light theme colors */
-            --color-primary: #3b82f6;
-            --color-secondary: #1e40af;
-            --color-accent: #10b981;
-            --color-success: #059669;
-            --color-warning: #d97706;
-            --color-error: #dc2626;
-            
-            --color-bg-primary: #ffffff;
-            --color-bg-secondary: #f8fafc;
-            --color-bg-tertiary: #e2e8f0;
-            --color-bg-gradient-start: #667eea;
-            --color-bg-gradient-end: #764ba2;
-            
-            --color-text-primary: #1e293b;
-            --color-text-secondary: #475569;
-            --color-text-tertiary: #64748b;
-            --color-text-inverse: #ffffff;
-            
-            --color-border: #e2e8f0;
-            --color-border-focus: #3b82f6;
-            
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            
-            --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-            --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
-            --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
-            --font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
-            --font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
-            --font-size-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
-            --font-size-3xl: clamp(2rem, 1.7rem + 1.5vw, 2.5rem);
-            
-            --border-radius-sm: 0.375rem;
-            --border-radius-md: 0.5rem;
-            --border-radius-lg: 0.75rem;
-            --border-radius-xl: 1rem;
-            
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            
-            --transition-fast: 150ms ease;
-            --transition-normal: 250ms ease;
-            --transition-slow: 350ms ease;
-        }
-        
-        [data-theme="dark"] {
-            --color-bg-primary: #0f172a;
-            --color-bg-secondary: #1e293b;
-            --color-bg-tertiary: #334155;
-            
-            --color-text-primary: #f1f5f9;
-            --color-text-secondary: #cbd5e1;
-            --color-text-tertiary: #94a3b8;
-            
-            --color-border: #334155;
-            
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.2);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.2);
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --color-bg-primary: #0f172a;
-                --color-bg-secondary: #1e293b;
-                --color-bg-tertiary: #334155;
-                
-                --color-text-primary: #f1f5f9;
-                --color-text-secondary: #cbd5e1;
-                --color-text-tertiary: #94a3b8;
-                
-                --color-border: #334155;
-                
-                --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.2);
-                --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
-                --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
-                --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.2);
-            }
-        }
-        
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-        
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 6rem;
-        }
-        
+
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--color-text-primary);
-            background: linear-gradient(135deg, var(--color-bg-gradient-start) 0%, var(--color-bg-gradient-end) 100%);
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            transition: color var(--transition-normal), background var(--transition-normal);
         }
-        
-        /* Skip to main content */
-        .skip-to-main {
-            position: absolute;
-            top: -40px;
-            left: var(--spacing-md);
-            background: var(--color-primary);
-            color: var(--color-text-inverse);
-            padding: var(--spacing-sm) var(--spacing-md);
-            text-decoration: none;
-            border-radius: var(--border-radius-md);
-            z-index: 1000;
-            transition: top var(--transition-fast);
-        }
-        
-        .skip-to-main:focus {
-            top: var(--spacing-md);
-        }
-        
-        /* Header */
-        .header {
-            text-align: center;
-            color: var(--color-text-inverse);
-            padding: var(--spacing-2xl) var(--spacing-md);
-            position: relative;
-        }
-        
-        .header__title {
-            font-size: var(--font-size-3xl);
-            font-weight: 700;
-            margin-bottom: var(--spacing-md);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            line-height: 1.2;
-        }
-        
-        .header__subtitle {
-            font-size: var(--font-size-lg);
-            opacity: 0.9;
-            font-weight: 400;
-        }
-        
-        .theme-toggle {
-            position: absolute;
-            top: var(--spacing-lg);
-            right: var(--spacing-lg);
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: var(--color-text-inverse);
-            padding: var(--spacing-sm);
-            border-radius: var(--border-radius-md);
-            cursor: pointer;
-            transition: all var(--transition-normal);
-            backdrop-filter: blur(10px);
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
-        
-        .theme-toggle:focus {
-            outline: 2px solid var(--color-text-inverse);
-            outline-offset: 2px;
-        }
-        
-        /* Container */
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--spacing-md);
+            padding: 20px;
         }
-        
-        /* Navigation */
-        .nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .profile-section {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: center;
             background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
             backdrop-filter: blur(10px);
-            border-radius: var(--border-radius-xl);
-            margin-bottom: var(--spacing-xl);
-            padding: var(--spacing-md);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
-        
-        .nav__list {
+
+        .profile-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-name {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 5px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-title {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--spacing-sm);
-            list-style: none;
-            justify-content: center;
+            gap: 5px;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
-        
-        .nav__button {
-            background: rgba(255, 255, 255, 0.2);
-            color: var(--color-text-inverse);
+
+        .nav-tab {
+            background: rgba(255,255,255,0.2);
+            color: white;
             border: none;
-            padding: var(--spacing-sm) var(--spacing-lg);
-            border-radius: var(--border-radius-md);
+            padding: 12px 20px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all var(--transition-normal);
-            font-size: var(--font-size-sm);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
             font-weight: 500;
-            text-decoration: none;
-            display: inline-block;
         }
-        
-        .nav__button:hover {
-            background: rgba(255, 255, 255, 0.3);
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.3);
             transform: translateY(-2px);
         }
-        
-        .nav__button:focus {
-            outline: 2px solid var(--color-text-inverse);
-            outline-offset: 2px;
+
+        .nav-tab.active {
+            background: #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
         }
-        
-        .nav__button--active {
-            background: var(--color-accent);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-        }
-        
-        /* Main content */
-        .main {
-            margin-bottom: var(--spacing-2xl);
-        }
-        
-        .section {
-            background: var(--color-bg-primary);
-            border-radius: var(--border-radius-xl);
-            padding: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
-            box-shadow: var(--shadow-xl);
+
+        .content-section {
             display: none;
-            scroll-margin-top: 6rem;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
         }
-        
-        .section--active {
+
+        .content-section.active {
             display: block;
             animation: fadeIn 0.5s ease;
         }
-        
+
         @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .section__title {
-            color: var(--color-text-primary);
-            border-bottom: 3px solid var(--color-primary);
-            padding-bottom: var(--spacing-md);
-            margin-bottom: var(--spacing-xl);
-            font-size: var(--font-size-2xl);
-            font-weight: 600;
-            line-height: 1.2;
-        }
-        
-        /* Comparison grid */
+
         .comparison-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--spacing-lg);
-            margin: var(--spacing-lg) 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
         }
-        
-        @media (min-width: 768px) {
-            .comparison-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+
+        .lang-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #007acc;
         }
-        
-        .lang-card {
-            background: var(--color-bg-secondary);
-            border-radius: var(--border-radius-lg);
-            padding: var(--spacing-lg);
-            border-left: 4px solid var(--color-primary);
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-        }
-        
-        .lang-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .lang-card--typescript {
+
+        .lang-section.typescript {
             border-left-color: #3178c6;
         }
-        
-        .lang-card--javascript {
+
+        .lang-section.javascript {
             border-left-color: #f7df1e;
         }
-        
-        .lang-card__header {
+
+        .lang-section h3 {
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
+            gap: 10px;
         }
-        
-        .lang-card__title {
-            font-size: var(--font-size-xl);
-            font-weight: 600;
-            color: var(--color-text-primary);
-        }
-        
+
         .lang-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: var(--border-radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
         }
-        
-        .lang-icon--js {
+
+        .js-icon {
             background: #f7df1e;
-            color: #000;
         }
-        
-        .lang-icon--ts {
+
+        .ts-icon {
             background: #3178c6;
         }
-        
-        /* Code blocks */
-        .code-block {
-            background: #1e293b;
+
+        pre {
+            background: #2d3748;
             color: #e2e8f0;
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-md);
+            padding: 20px;
+            border-radius: 8px;
             overflow-x: auto;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-            font-size: var(--font-size-sm);
-            line-height: 1.5;
-            margin: var(--spacing-lg) 0;
-            position: relative;
+            font-size: 0.9rem;
+            margin: 15px 0;
         }
-        
-        .code-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #3178c6, #f7df1e);
+
+        .code-highlight {
+            background: #1a202c;
+            border: 1px solid #4a5568;
         }
-        
-        /* Feature lists */
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pros, .cons {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .pros {
+            border-left: 4px solid #4CAF50;
+        }
+
+        .cons {
+            border-left: 4px solid #f44336;
+        }
+
+        .pros h4, .cons h4 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pros h4::before {
+            content: '✅';
+        }
+
+        .cons h4::before {
+            content: '❌';
+        }
+
         .feature-list {
             list-style: none;
             padding: 0;
         }
-        
-        .feature-list__item {
-            padding: var(--spacing-sm) 0;
-            border-bottom: 1px solid var(--color-border);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            transition: background-color var(--transition-fast);
+
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
         }
-        
-        .feature-list__item:hover {
-            background-color: var(--color-bg-tertiary);
-            padding-left: var(--spacing-sm);
-            border-radius: var(--border-radius-sm);
+
+        .feature-list li::before {
+            margin-right: 10px;
         }
-        
-        .feature-list__item:last-child {
-            border-bottom: none;
+
+        .pros .feature-list li::before {
+            content: '✅';
         }
-        
-        .feature-list__icon {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
+
+        .cons .feature-list li::before {
+            content: '❌';
         }
-        
-        /* Pros and cons */
-        .pros-cons-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--spacing-lg);
-            margin: var(--spacing-lg) 0;
-        }
-        
-        @media (min-width: 768px) {
-            .pros-cons-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        .pros-card,
-        .cons-card {
-            background: var(--color-bg-secondary);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-lg);
-            border-left: 4px solid var(--color-success);
-        }
-        
-        .cons-card {
-            border-left-color: var(--color-error);
-        }
-        
-        .pros-card__title,
-        .cons-card__title {
-            margin-bottom: var(--spacing-lg);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            font-size: var(--font-size-lg);
-            font-weight: 600;
-        }
-        
-        /* Recommendation box */
-        .recommendation {
-            background: linear-gradient(135deg, var(--color-accent), var(--color-success));
-            color: var(--color-text-inverse);
-            padding: var(--spacing-xl);
-            border-radius: var(--border-radius-xl);
-            margin: var(--spacing-lg) 0;
+
+        .recommendation-box {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
             text-align: center;
         }
-        
-        .recommendation__title {
-            margin-bottom: var(--spacing-lg);
-            font-size: var(--font-size-xl);
-            font-weight: 600;
+
+        .recommendation-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
         }
-        
-        .recommendation__text {
-            font-size: var(--font-size-base);
-            line-height: 1.7;
-        }
-        
-        /* File structure */
+
         .file-structure {
-            background: var(--color-bg-secondary);
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius-md);
-            padding: var(--spacing-lg);
-            margin: var(--spacing-lg) 0;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
             white-space: pre-line;
-            font-size: var(--font-size-sm);
-            overflow-x: auto;
         }
-        
-        /* Performance meters */
-        .performance-metric {
-            margin: var(--spacing-lg) 0;
-        }
-        
-        .performance-metric__label {
-            font-weight: 600;
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-text-primary);
-        }
-        
-        .performance-meter {
-            height: 24px;
-            background: var(--color-bg-tertiary);
-            border-radius: var(--border-radius-xl);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .performance-meter__bar {
-            height: 100%;
-            border-radius: var(--border-radius-xl);
-            transition: width var(--transition-slow);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: var(--spacing-sm);
+
+        .toggle-button {
+            background: #007acc;
             color: white;
-            font-size: var(--font-size-xs);
-            font-weight: 600;
-        }
-        
-        .performance-meter__bar--fast {
-            background: linear-gradient(90deg, var(--color-success), #10b981);
-        }
-        
-        .performance-meter__bar--medium {
-            background: linear-gradient(90deg, var(--color-warning), #f59e0b);
-        }
-        
-        .performance-meter__bar--slow {
-            background: linear-gradient(90deg, var(--color-error), #ef4444);
-        }
-        
-        /* Highlight box */
-        .highlight-box {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-            color: var(--color-text-inverse);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-lg);
-            margin: var(--spacing-lg) 0;
-        }
-        
-        .highlight-box__title {
-            margin-bottom: var(--spacing-md);
-            font-size: var(--font-size-lg);
-            font-weight: 600;
-        }
-        
-        .highlight-box__text {
-            line-height: 1.7;
-        }
-        
-        /* Back to top */
-        .back-to-top {
-            position: fixed;
-            bottom: var(--spacing-xl);
-            right: var(--spacing-xl);
-            background: var(--color-primary);
-            color: var(--color-text-inverse);
             border: none;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
+            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
-            box-shadow: var(--shadow-lg);
-            transition: all var(--transition-normal);
-            opacity: 0;
-            visibility: hidden;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: 10px 5px;
+            transition: background 0.3s ease;
         }
-        
-        .back-to-top--visible {
-            opacity: 1;
-            visibility: visible;
+
+        .toggle-button:hover {
+            background: #005a9e;
         }
-        
-        .back-to-top:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-            background: var(--color-secondary);
+
+        .toggle-button.active {
+            background: #4CAF50;
         }
-        
-        .back-to-top:focus {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
+
+        .syntax-demo {
+            display: none;
         }
-        
-        /* Focus management */
-        *:focus {
-            outline: 2px solid var(--color-border-focus);
-            outline-offset: 2px;
+
+        .syntax-demo.active {
+            display: block;
         }
-        
-        /* Mobile optimizations */
-        @media (max-width: 767px) {
-            .container {
-                padding: 0 var(--spacing-sm);
-            }
-            
-            .nav {
-                padding: var(--spacing-sm);
-            }
-            
-            .nav__list {
-                gap: var(--spacing-xs);
-            }
-            
-            .nav__button {
-                padding: var(--spacing-sm) var(--spacing-md);
-                font-size: var(--font-size-xs);
-            }
-            
-            .section {
-                padding: var(--spacing-lg);
-            }
-            
-            .theme-toggle {
-                top: var(--spacing-md);
-                right: var(--spacing-md);
-                width: 40px;
-                height: 40px;
-            }
-            
-            .back-to-top {
-                width: 48px;
-                height: 48px;
-                bottom: var(--spacing-lg);
-                right: var(--spacing-lg);
-            }
+
+        .performance-meter {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
         }
-        
-        /* Print styles */
-        @media print {
-            .nav,
-            .theme-toggle,
-            .back-to-top {
-                display: none;
+
+        .performance-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .performance-bar.fast {
+            background: #4CAF50;
+        }
+
+        .performance-bar.medium {
+            background: #FF9800;
+        }
+
+        .performance-bar.slow {
+            background: #f44336;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid, .pros-cons {
+                grid-template-columns: 1fr;
             }
             
-            .section {
-                display: block !important;
-                break-inside: avoid;
-                page-break-inside: avoid;
+            .nav-tabs {
+                flex-direction: column;
             }
             
-            body {
-                background: white;
-                color: black;
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .profile-section {
+                position: static;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+
+            .profile-photo {
+                width: 60px;
+                height: 60px;
+            }
+
+            .profile-name {
+                font-size: 0.9rem;
+            }
+
+            .profile-title {
+                font-size: 0.75rem;
             }
         }
-        
-        /* High contrast mode */
-        @media (prefers-contrast: high) {
-            :root {
-                --color-border: #000000;
-                --color-text-primary: #000000;
-                --color-bg-primary: #ffffff;
-            }
-            
-            [data-theme="dark"] {
-                --color-border: #ffffff;
-                --color-text-primary: #ffffff;
-                --color-bg-primary: #000000;
-            }
+
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
         }
-        
-        /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-            
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
         }
-        
-        /* Loading state */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
+
+        .highlight-box h4 {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-to-main">Ana içeriğe geç</a>
-    
-    <header class="header" role="banner">
-        <button class="theme-toggle" type="button" aria-label="Tema değiştir (şu an: açık)">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-        </button>
-        <div class="container">
-            <h1 class="header__title">TypeScript vs JavaScript</h1>
-            <p class="header__subtitle">Cypress Test Otomasyonu Karşılaştırması</p>
-        </div>
-    </header>
-
     <div class="container">
-        <nav class="nav" role="navigation" aria-label="Ana navigasyon">
-            <ul class="nav__list">
-                <li><button class="nav__button nav__button--active" data-section="overview" type="button">Genel Bakış</button></li>
-                <li><button class="nav__button" data-section="syntax" type="button">Söz Dizimi</button></li>
-                <li><button class="nav__button" data-section="variables" type="button">Değişkenler</button></li>
-                <li><button class="nav__button" data-section="functions" type="button">Fonksiyonlar</button></li>
-                <li><button class="nav__button" data-section="cypress" type="button">Cypress Komutları</button></li>
-                <li><button class="nav__button" data-section="errors" type="button">Hata Yönetimi</button></li>
-                <li><button class="nav__button" data-section="config" type="button">Proje Yapılandırması</button></li>
-                <li><button class="nav__button" data-section="comparison" type="button">Karşılaştırma</button></li>
-                <li><button class="nav__button" data-section="performance" type="button">Performans</button></li>
-                <li><button class="nav__button" data-section="recommendations" type="button">Öneriler</button></li>
-            </ul>
-        </nav>
+        <div class="header">
+            <div class="profile-section">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABwAHADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k=" alt="Hasan Kocaman" class="profile-photo">
+                <div class="profile-name">Hasan Kocaman</div>
+                <div class="profile-title">Software Tester</div>
+            </div>
+            <h1>TypeScript vs JavaScript</h1>
+            <p>Cypress Test Otomasyonu Karşılaştırması</p>
+        </div>
 
-        <main class="main" id="main-content" role="main">
-            <!-- Genel Bakış -->
-            <section id="overview" class="section section--active" aria-labelledby="overview-title">
-                <h2 class="section__title" id="overview-title">Genel Bakış</h2>
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--js">JS</div>
-                            <h3 class="lang-card__title">JavaScript</h3>
-                        </header>
-                        <ul class="feature-list">
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Dinamik tip sistemi
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Runtime'da tip kontrolü
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Hızlı başlangıç
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Esnek yapı
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Geniş topluluk desteği
-                            </li>
-                        </ul>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--ts">TS</div>
-                            <h3 class="lang-card__title">TypeScript</h3>
-                        </header>
-                        <ul class="feature-list">
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Statik tip sistemi
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Compile-time tip kontrolü
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Daha güvenli kod
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                IntelliSense desteği
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Büyük projeler için ideal
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-                <div class="highlight-box">
-                    <h4 class="highlight-box__title">Hangi Durumlarda Hangisini Seçmeli?</h4>
-                    <p class="highlight-box__text"><strong>JavaScript:</strong> Küçük projeler, hızlı prototipleme, başlangıç seviyesi ekipler<br>
-                    <strong>TypeScript:</strong> Büyük projeler, kurumsal uygulamalar, uzun vadeli bakım</p>
-                </div>
-            </section>
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview')">Genel Bakış</button>
+            <button class="nav-tab" onclick="showSection('syntax')">Söz Dizimi</button>
+            <button class="nav-tab" onclick="showSection('variables')">Değişkenler</button>
+            <button class="nav-tab" onclick="showSection('functions')">Fonksiyonlar</button>
+            <button class="nav-tab" onclick="showSection('cypress')">Cypress Komutları</button>
+            <button class="nav-tab" onclick="showSection('errors')">Hata Yönetimi</button>
+            <button class="nav-tab" onclick="showSection('config')">Proje Yapılandırması</button>
+            <button class="nav-tab" onclick="showSection('comparison')">Karşılaştırma</button>
+            <button class="nav-tab" onclick="showSection('performance')">Performans</button>
+            <button class="nav-tab" onclick="showSection('recommendations')">Öneriler</button>
+        </div>
 
-            <!-- Söz Dizimi -->
-            <section id="syntax" class="section" aria-labelledby="syntax-title">
-                <h2 class="section__title" id="syntax-title">Temel Söz Dizimi Karşılaştırması</h2>
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--js">JS</div>
-                            <h3 class="lang-card__title">JavaScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="JavaScript test örneği"><code>// Basit test yapısı
+        <!-- Genel Bakış -->
+        <div id="overview" class="content-section active">
+            <h2 class="section-title">Genel Bakış</h2>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <ul class="feature-list">
+                        <li>Dinamik tip sistemi</li>
+                        <li>Runtime'da tip kontrolü</li>
+                        <li>Hızlı başlangıç</li>
+                        <li>Esnek yapı</li>
+                        <li>Geniş topluluk desteği</li>
+                    </ul>
+                </div>
+                <div class="lang-section typescript">
+                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <ul class="feature-list">
+                        <li>Statik tip sistemi</li>
+                        <li>Compile-time tip kontrolü</li>
+                        <li>Daha güvenli kod</li>
+                        <li>IntelliSense desteği</li>
+                        <li>Büyük projeler için ideal</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <h4>Hangi Durumlarda Hangisini Seçmeli?</h4>
+                <p><strong>JavaScript:</strong> Küçük projeler, hızlı prototipleme, başlangıç seviyesi ekipler</p>
+                <p><strong>TypeScript:</strong> Büyük projeler, kurumsal uygulamalar, uzun vadeli bakım</p>
+            </div>
+        </div>
+
+        <!-- Söz Dizimi -->
+        <div id="syntax" class="content-section">
+            <h2 class="section-title">Temel Söz Dizimi Karşılaştırması</h2>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+<pre class="code-highlight">
+// Basit test yapısı
 describe('Login Tests', () => {
   it('should login successfully', () => {
     cy.visit('/login')
@@ -846,14 +456,12 @@ describe('Login Tests', () => {
     cy.get('[data-cy=login-btn]').click()
     cy.url().should('include', '/dashboard')
   })
-})</code></pre>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--ts">TS</div>
-                            <h3 class="lang-card__title">TypeScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="TypeScript test örneği"><code>// Tip tanımlamalı test yapısı
+})</pre>
+                </div>
+                <div class="lang-section typescript">
+                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+<pre class="code-highlight">
+// Tip tanımlamalı test yapısı
 describe('Login Tests', (): void => {
   it('should login successfully', (): void => {
     cy.visit('/login')
@@ -864,21 +472,19 @@ describe('Login Tests', (): void => {
     cy.get('[data-cy=login-btn]').click()
     cy.url().should('include', '/dashboard')
   })
-})</code></pre>
-                    </article>
+})</pre>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- Değişkenler -->
-            <section id="variables" class="section" aria-labelledby="variables-title">
-                <h2 class="section__title" id="variables-title">Değişken Tanımlama</h2>
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--js">JS</div>
-                            <h3 class="lang-card__title">JavaScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="JavaScript değişken örnekleri"><code>// Değişken tanımlama
+        <!-- Değişkenler -->
+        <div id="variables" class="content-section">
+            <h2 class="section-title">Değişken Tanımlama</h2>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+<pre class="code-highlight">
+// Değişken tanımlama
 const testData = {
   username: 'test@example.com',
   password: 'password123'
@@ -888,14 +494,12 @@ let currentUser = null
 var isLoggedIn = false
 
 // Array tanımlama
-const testUsers = ['user1', 'user2', 'user3']</code></pre>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--ts">TS</div>
-                            <h3 class="lang-card__title">TypeScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="TypeScript değişken örnekleri"><code>// Interface tanımı
+const testUsers = ['user1', 'user2', 'user3']</pre>
+                </div>
+                <div class="lang-section typescript">
+                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+<pre class="code-highlight">
+// Interface tanımı
 interface TestData {
   username: string;
   password: string;
@@ -914,21 +518,19 @@ const testUsers: string[] = ['user1', 'user2', 'user3']
 
 // Custom tipler
 type UserRole = 'admin' | 'user' | 'guest'
-const userRole: UserRole = 'admin'</code></pre>
-                    </article>
+const userRole: UserRole = 'admin'</pre>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- Fonksiyonlar -->
-            <section id="functions" class="section" aria-labelledby="functions-title">
-                <h2 class="section__title" id="functions-title">Fonksiyon Tanımlama</h2>
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--js">JS</div>
-                            <h3 class="lang-card__title">JavaScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="JavaScript fonksiyon örnekleri"><code>// Basit fonksiyon
+        <!-- Fonksiyonlar -->
+        <div id="functions" class="content-section">
+            <h2 class="section-title">Fonksiyon Tanımlama</h2>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+<pre class="code-highlight">
+// Basit fonksiyon
 function loginUser(username, password) {
   cy.get('[data-cy=username]').type(username)
   cy.get('[data-cy=password]').type(password)
@@ -944,14 +546,12 @@ const checkUrl = (expectedUrl) => {
 async function fetchUserData(userId) {
   const response = await cy.request(`/api/users/${userId}`)
   return response.body
-}</code></pre>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--ts">TS</div>
-                            <h3 class="lang-card__title">TypeScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="TypeScript fonksiyon örnekleri"><code>// Tip tanımlamalı fonksiyon
+}</pre>
+                </div>
+                <div class="lang-section typescript">
+                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+<pre class="code-highlight">
+// Tip tanımlamalı fonksiyon
 function loginUser(username: string, password: string): void {
   cy.get('[data-cy=username]').type(username)
   cy.get('[data-cy=password]').type(password)
@@ -970,24 +570,22 @@ function loginWithCredentials(credentials: LoginCredentials): void {
 }
 
 // Return tipi belirtilmiş async fonksiyon
-async function fetchUserData(userId: number): Promise&lt;any&gt; {
+async function fetchUserData(userId: number): Promise<any> {
   const response = await cy.request(`/api/users/${userId}`)
   return response.body
-}</code></pre>
-                    </article>
+}</pre>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- Cypress Komutları -->
-            <section id="cypress" class="section" aria-labelledby="cypress-title">
-                <h2 class="section__title" id="cypress-title">Cypress Komutları</h2>
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--js">JS</div>
-                            <h3 class="lang-card__title">JavaScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="JavaScript Cypress komutları"><code>describe('Cypress Commands', () => {
+        <!-- Cypress Komutları -->
+        <div id="cypress" class="content-section">
+            <h2 class="section-title">Cypress Komutları</h2>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+<pre class="code-highlight">
+describe('Cypress Commands', () => {
   it('should handle API requests', () => {
     cy.request('POST', '/api/login', {
       username: 'test@example.com',
@@ -1005,14 +603,12 @@ Cypress.Commands.add('loginViaUI', (username, password) => {
   cy.get('[data-cy=username]').type(username)
   cy.get('[data-cy=password]').type(password)
   cy.get('[data-cy=login-btn]').click()
-})</code></pre>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--ts">TS</div>
-                            <h3 class="lang-card__title">TypeScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="TypeScript Cypress komutları"><code>// Tip güvenli API çağrısı
+})</pre>
+                </div>
+                <div class="lang-section typescript">
+                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+<pre class="code-highlight">
+// Tip güvenli API çağrısı
 interface LoginResponse {
   token: string;
   user: { id: number; email: string; };
@@ -1037,21 +633,19 @@ declare global {
       loginViaUI(username: string, password: string): Chainable&lt;void&gt;
     }
   }
-}</code></pre>
-                    </article>
+}</pre>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- Hata Yönetimi -->
-            <section id="errors" class="section" aria-labelledby="errors-title">
-                <h2 class="section__title" id="errors-title">Hata Yönetimi</h2>
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--js">JS</div>
-                            <h3 class="lang-card__title">JavaScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="JavaScript hata yönetimi"><code>// Basit hata yakalama
+        <!-- Hata Yönetimi -->
+        <div id="errors" class="content-section">
+            <h2 class="section-title">Hata Yönetimi</h2>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+<pre class="code-highlight">
+// Basit hata yakalama
 it('should handle errors', () => {
   try {
     cy.get('.non-existent-element').click()
@@ -1064,14 +658,12 @@ it('should handle errors', () => {
 Cypress.on('fail', (err, runnable) => {
   console.log('Test başarısız:', err.message)
   return false
-})</code></pre>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--ts">TS</div>
-                            <h3 class="lang-card__title">TypeScript</h3>
-                        </header>
-                        <pre class="code-block" role="img" aria-label="TypeScript hata yönetimi"><code>// Tip güvenli hata yakalama
+})</pre>
+                </div>
+                <div class="lang-section typescript">
+                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+<pre class="code-highlight">
+// Tip güvenli hata yakalama
 it('should handle errors', (): void => {
   try {
     cy.get('.non-existent-element').click()
@@ -1094,21 +686,18 @@ class TestError extends Error {
 Cypress.on('fail', (err: Error, runnable: Mocha.Runnable): boolean => {
   console.log('Test başarısız:', err.message)
   return false
-})</code></pre>
-                    </article>
+})</pre>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- Proje Yapılandırması -->
-            <section id="config" class="section" aria-labelledby="config-title">
-                <h2 class="section__title" id="config-title">Proje Yapılandırması</h2>
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--js">JS</div>
-                            <h3 class="lang-card__title">JavaScript Projesi</h3>
-                        </header>
-                        <div class="file-structure" role="img" aria-label="JavaScript proje yapısı">cypress-js-project/
+        <!-- Proje Yapılandırması -->
+        <div id="config" class="content-section">
+            <h2 class="section-title">Proje Yapılandırması</h2>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3><div class="lang-icon js-icon"></div> JavaScript Projesi</h3>
+                    <div class="file-structure">cypress-js-project/
 ├── cypress/
 │   ├── e2e/
 │   │   └── login.cy.js
@@ -1120,7 +709,8 @@ Cypress.on('fail', (err: Error, runnable: Mocha.Runnable): boolean => {
 │   └── downloads/
 ├── cypress.config.js
 └── package.json</div>
-                        <pre class="code-block" role="img" aria-label="JavaScript Cypress konfigürasyonu"><code>// cypress.config.js
+<pre class="code-highlight">
+// cypress.config.js
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
@@ -1130,14 +720,11 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
   },
-})</code></pre>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--ts">TS</div>
-                            <h3 class="lang-card__title">TypeScript Projesi</h3>
-                        </header>
-                        <div class="file-structure" role="img" aria-label="TypeScript proje yapısı">cypress-ts-project/
+})</pre>
+                </div>
+                <div class="lang-section typescript">
+                    <h3><div class="lang-icon ts-icon"></div> TypeScript Projesi</h3>
+                    <div class="file-structure">cypress-ts-project/
 ├── cypress/
 │   ├── e2e/
 │   │   └── login.cy.ts
@@ -1151,7 +738,8 @@ module.exports = defineConfig({
 ├── cypress.config.ts
 ├── tsconfig.json
 └── package.json</div>
-                        <pre class="code-block" role="img" aria-label="TypeScript Cypress konfigürasyonu"><code>// cypress.config.ts
+<pre class="code-highlight">
+// cypress.config.ts
 import { defineConfig } from 'cypress'
 
 export default defineConfig({
@@ -1162,618 +750,178 @@ export default defineConfig({
       // implement node event listeners here
     },
   },
-})</code></pre>
-                    </article>
+})</pre>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- Karşılaştırma -->
-            <section id="comparison" class="section" aria-labelledby="comparison-title">
-                <h2 class="section__title" id="comparison-title">Avantajlar ve Dezavantajlar</h2>
-                
-                <h3>JavaScript</h3>
-                <div class="pros-cons-grid">
-                    <div class="pros-card">
-                        <h4 class="pros-card__title">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Avantajlar
-                        </h4>
-                        <ul class="feature-list">
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Hızlı başlangıç
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Esnek yapı
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Daha az konfigürasyon
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Geniş topluluk desteği
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Runtime'da dinamik değişiklikler
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="cons-card">
-                        <h4 class="cons-card__title">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                            Dezavantajlar
-                        </h4>
-                        <ul class="feature-list">
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Runtime hataları
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Tip güvenliği yok
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                IntelliSense desteği sınırlı
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Refactoring zorluğu
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Büyük projelerde bakım zorluğu
-                            </li>
-                        </ul>
+        <!-- Karşılaştırma -->
+        <div id="comparison" class="content-section">
+            <h2 class="section-title">Avantajlar ve Dezavantajlar</h2>
+            
+            <h3>JavaScript</h3>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>Avantajlar</h4>
+                    <ul class="feature-list">
+                        <li>Hızlı başlangıç</li>
+                        <li>Esnek yapı</li>
+                        <li>Daha az konfigürasyon</li>
+                        <li>Geniş topluluk desteği</li>
+                        <li>Runtime'da dinamik değişiklikler</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>Dezavantajlar</h4>
+                    <ul class="feature-list">
+                        <li>Runtime hataları</li>
+                        <li>Tip güvenliği yok</li>
+                        <li>IntelliSense desteği sınırlı</li>
+                        <li>Refactoring zorluğu</li>
+                        <li>Büyük projelerde bakım zorluğu</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>TypeScript</h3>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>Avantajlar</h4>
+                    <ul class="feature-list">
+                        <li>Tip güvenliği</li>
+                        <li>Compile-time hata yakalama</li>
+                        <li>Mükemmel IntelliSense desteği</li>
+                        <li>Kolay refactoring</li>
+                        <li>Daha iyi kod dokumentasyonu</li>
+                        <li>Büyük projelerde bakım kolaylığı</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>Dezavantajlar</h4>
+                    <ul class="feature-list">
+                        <li>Öğrenme eğrisi</li>
+                        <li>Daha fazla konfigürasyon</li>
+                        <li>Derleme süreci</li>
+                        <li>Daha fazla kod yazma</li>
+                        <li>Bazen aşırı karmaşık tip tanımları</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performans -->
+        <div id="performance" class="content-section">
+            <h2 class="section-title">Performans Karşılaştırması</h2>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <div>
+                        <p><strong>Başlatma Süresi:</strong></p>
+                        <div class="performance-meter">
+                            <div class="performance-bar fast" style="width: 90%"></div>
+                        </div>
+                        <p><strong>Derleme:</strong> Yok</p>
+                        <div class="performance-meter">
+                            <div class="performance-bar fast" style="width: 100%"></div>
+                        </div>
+                        <p><strong>Çalışma Süresi:</strong></p>
+                        <div class="performance-meter">
+                            <div class="performance-bar fast" style="width: 95%"></div>
+                        </div>
+                        <p><strong>Bellek Kullanımı:</strong></p>
+                        <div class="performance-meter">
+                            <div class="performance-bar fast" style="width: 85%"></div>
+                        </div>
                     </div>
                 </div>
-
-                <h3>TypeScript</h3>
-                <div class="pros-cons-grid">
-                    <div class="pros-card">
-                        <h4 class="pros-card__title">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Avantajlar
-                        </h4>
-                        <ul class="feature-list">
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Tip güvenliği
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Compile-time hata yakalama
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Mükemmel IntelliSense desteği
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Kolay refactoring
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Daha iyi kod dokumentasyonu
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Büyük projelerde bakım kolaylığı
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="cons-card">
-                        <h4 class="cons-card__title">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                            Dezavantajlar
-                        </h4>
-                        <ul class="feature-list">
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Öğrenme eğrisi
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Daha fazla konfigürasyon
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Derleme süreci
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Daha fazla kod yazma
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                                Bazen aşırı karmaşık tip tanımları
-                            </li>
-                        </ul>
+                <div class="lang-section typescript">
+                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <div>
+                        <p><strong>Başlatma Süresi:</strong></p>
+                        <div class="performance-meter">
+                            <div class="performance-bar medium" style="width: 70%"></div>
+                        </div>
+                        <p><strong>Derleme:</strong> Var</p>
+                        <div class="performance-meter">
+                            <div class="performance-bar slow" style="width: 60%"></div>
+                        </div>
+                        <p><strong>Çalışma Süresi:</strong></p>
+                        <div class="performance-meter">
+                            <div class="performance-bar fast" style="width: 95%"></div>
+                        </div>
+                        <p><strong>Bellek Kullanımı:</strong></p>
+                        <div class="performance-meter">
+                            <div class="performance-bar medium" style="width: 75%"></div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- Performans -->
-            <section id="performance" class="section" aria-labelledby="performance-title">
-                <h2 class="section__title" id="performance-title">Performans Karşılaştırması</h2>
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--js">JS</div>
-                            <h3 class="lang-card__title">JavaScript</h3>
-                        </header>
-                        <div class="performance-metric">
-                            <div class="performance-metric__label">Başlatma Süresi:</div>
-                            <div class="performance-meter">
-                                <div class="performance-meter__bar performance-meter__bar--fast" style="width: 90%" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Başlatma süresi: 90%">90%</div>
-                            </div>
-                        </div>
-                        <div class="performance-metric">
-                            <div class="performance-metric__label">Derleme: Yok</div>
-                            <div class="performance-meter">
-                                <div class="performance-meter__bar performance-meter__bar--fast" style="width: 100%" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Derleme süresi: Yok">100%</div>
-                            </div>
-                        </div>
-                        <div class="performance-metric">
-                            <div class="performance-metric__label">Çalışma Süresi:</div>
-                            <div class="performance-meter">
-                                <div class="performance-meter__bar performance-meter__bar--fast" style="width: 95%" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Çalışma süresi: 95%">95%</div>
-                            </div>
-                        </div>
-                        <div class="performance-metric">
-                            <div class="performance-metric__label">Bellek Kullanımı:</div>
-                            <div class="performance-meter">
-                                <div class="performance-meter__bar performance-meter__bar--fast" style="width: 85%" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Bellek kullanımı: 85%">85%</div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <header class="lang-card__header">
-                            <div class="lang-icon lang-icon--ts">TS</div>
-                            <h3 class="lang-card__title">TypeScript</h3>
-                        </header>
-                        <div class="performance-metric">
-                            <div class="performance-metric__label">Başlatma Süresi:</div>
-                            <div class="performance-meter">
-                                <div class="performance-meter__bar performance-meter__bar--medium" style="width: 70%" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" aria-label="Başlatma süresi: 70%">70%</div>
-                            </div>
-                        </div>
-                        <div class="performance-metric">
-                            <div class="performance-metric__label">Derleme: Var</div>
-                            <div class="performance-meter">
-                                <div class="performance-meter__bar performance-meter__bar--slow" style="width: 60%" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-label="Derleme süresi: 60%">60%</div>
-                            </div>
-                        </div>
-                        <div class="performance-metric">
-                            <div class="performance-metric__label">Çalışma Süresi:</div>
-                            <div class="performance-meter">
-                                <div class="performance-meter__bar performance-meter__bar--fast" style="width: 95%" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Çalışma süresi: 95%">95%</div>
-                            </div>
-                        </div>
-                        <div class="performance-metric">
-                            <div class="performance-metric__label">Bellek Kullanımı:</div>
-                            <div class="performance-meter">
-                                <div class="performance-meter__bar performance-meter__bar--medium" style="width: 75%" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="Bellek kullanımı: 75%">75%</div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
+        <!-- Öneriler -->
+        <div id="recommendations" class="content-section">
+            <h2 class="section-title">Öneriler ve Sonuç</h2>
+            
+            <div class="recommendation-box">
+                <h3>🎯 Genel Tavsiye</h3>
+                <p>Cypress öğrenirken JavaScript ile başlayıp, deneyim kazandıkça TypeScript'e geçiş yapmak ideal bir yaklaşım olabilir.</p>
+            </div>
 
-            <!-- Öneriler -->
-            <section id="recommendations" class="section" aria-labelledby="recommendations-title">
-                <h2 class="section__title" id="recommendations-title">Öneriler ve Sonuç</h2>
-                
-                <div class="recommendation">
-                    <h3 class="recommendation__title">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; margin-right: 8px;">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                        </svg>
-                        Genel Tavsiye
-                    </h3>
-                    <p class="recommendation__text">Cypress öğrenirken JavaScript ile başlayıp, deneyim kazandıkça TypeScript'e geçiş yapmak ideal bir yaklaşım olabilir.</p>
+            <div class="comparison-grid">
+                <div class="lang-section javascript">
+                    <h3>JavaScript Kullanımı Önerilir:</h3>
+                    <ul class="feature-list">
+                        <li>Küçük ve orta ölçekli projeler</li>
+                        <li>Hızlı prototipleme</li>
+                        <li>Başlangıç seviyesi ekipler</li>
+                        <li>Basit test senaryoları</li>
+                        <li>Hızlı MVP geliştirme</li>
+                    </ul>
                 </div>
+                <div class="lang-section typescript">
+                    <h3>TypeScript Kullanımı Önerilir:</h3>
+                    <ul class="feature-list">
+                        <li>Büyük ölçekli projeler</li>
+                        <li>Kurumsal uygulamalar</li>
+                        <li>Deneyimli geliştirici ekipleri</li>
+                        <li>Kompleks test senaryoları</li>
+                        <li>Uzun vadeli bakım gerektiren projeler</li>
+                    </ul>
+                </div>
+            </div>
 
-                <div class="comparison-grid">
-                    <article class="lang-card lang-card--javascript">
-                        <h3 class="lang-card__title">JavaScript Kullanımı Önerilir:</h3>
-                        <ul class="feature-list">
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Küçük ve orta ölçekli projeler
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Hızlı prototipleme
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Başlangıç seviyesi ekipler
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Basit test senaryoları
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Hızlı MVP geliştirme
-                            </li>
-                        </ul>
-                    </article>
-                    <article class="lang-card lang-card--typescript">
-                        <h3 class="lang-card__title">TypeScript Kullanımı Önerilir:</h3>
-                        <ul class="feature-list">
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Büyük ölçekli projeler
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Kurumsal uygulamalar
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Deneyimli geliştirici ekipleri
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Kompleks test senaryoları
-                            </li>
-                            <li class="feature-list__item">
-                                <svg class="feature-list__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                Uzun vadeli bakım gerektiren projeler
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-
-                <div class="highlight-box">
-                    <h4 class="highlight-box__title">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; margin-right: 8px;">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                        </svg>
-                        Sonuç
-                    </h4>
-                    <p class="highlight-box__text">Her iki yaklaşımın da kendine özgü avantajları vardır. JavaScript basitlik ve hızlı geliştirme sunarken, TypeScript tip güvenliği ve uzun vadeli bakım kolaylığı sağlar.</p>
-                </div>
-            </section>
-        </main>
+            <div class="highlight-box">
+                <h4>💡 Sonuç</h4>
+                <p>Her iki yaklaşımın da kendine özgü avantajları vardır. JavaScript basitlik ve hızlı başlangıç sunarken, TypeScript tip güvenliği ve daha iyi kod kalitesi sağlar. Proje gereksinimlerinize, ekip deneyiminize ve uzun vadeli hedeflerinize göre seçim yapmanız önerilir.</p>
+            </div>
+        </div>
     </div>
 
-    <button class="back-to-top" type="button" aria-label="Sayfa başına git">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="19" x2="12" y2="5"></line>
-            <polyline points="5,12 12,5 19,12"></polyline>
-        </svg>
-    </button>
-
-    <noscript>
-        <style>
-            .section {
-                display: block !important;
-            }
-            .nav, .back-to-top, .theme-toggle {
-                display: none;
-            }
-        </style>
-        <div style="background: #fef3c7; color: #92400e; padding: 1rem; text-align: center; font-weight: 600;">
-            Bu sayfa JavaScript olmadan da görüntülenebilir, ancak bazı interaktif özellikler çalışmayabilir.
-        </div>
-    </noscript>
-
     <script>
-        (() => {
-            'use strict';
-            
-            // Theme management
-            const themeToggle = document.querySelector('.theme-toggle');
-            const html = document.documentElement;
-            
-            const initTheme = () => {
-                const savedTheme = localStorage.getItem('theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-                
-                setTheme(theme);
-            };
-            
-            const setTheme = (theme) => {
-                html.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                updateThemeToggleLabel(theme);
-            };
-            
-            const updateThemeToggleLabel = (theme) => {
-                const label = theme === 'dark' ? 'Tema değiştir (şu an: koyu)' : 'Tema değiştir (şu an: açık)';
-                themeToggle.setAttribute('aria-label', label);
-                
-                const isDark = theme === 'dark';
-                themeToggle.innerHTML = isDark 
-                    ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                       </svg>`
-                    : `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                       </svg>`;
-            };
-            
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = html.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                setTheme(newTheme);
+        function showSection(sectionId) {
+            // Tüm section'ları gizle
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
             });
-            
-            // Navigation management
-            const navButtons = document.querySelectorAll('.nav__button');
-            const sections = document.querySelectorAll('.section');
-            
-            const showSection = (targetSection) => {
-                // Update sections
-                sections.forEach(section => {
-                    const isTarget = section.id === targetSection;
-                    section.classList.toggle('section--active', isTarget);
-                    section.setAttribute('aria-hidden', !isTarget);
-                });
-                
-                // Update navigation
-                navButtons.forEach(button => {
-                    const isActive = button.getAttribute('data-section') === targetSection;
-                    button.classList.toggle('nav__button--active', isActive);
-                    button.setAttribute('aria-current', isActive ? 'page' : 'false');
-                });
-                
-                // Focus management
-                const targetSectionElement = document.getElementById(targetSection);
-                if (targetSectionElement) {
-                    targetSectionElement.scrollIntoView({ behavior: 'smooth' });
-                    const heading = targetSectionElement.querySelector('h2');
-                    if (heading) {
-                        heading.setAttribute('tabindex', '-1');
-                        heading.focus();
-                        heading.addEventListener('blur', () => {
-                            heading.removeAttribute('tabindex');
-                        }, { once: true });
-                    }
-                }
-            };
-            
-            // Navigation event listeners
-            navButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const section = button.getAttribute('data-section');
-                    showSection(section);
-                });
+
+            // Tüm tab'ları pasif yap
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
             });
-            
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    const activeElement = document.activeElement;
-                    if (activeElement && activeElement !== document.body) {
-                        activeElement.blur();
-                    }
-                }
-                
-                // Arrow key navigation for tabs
-                if (e.target.classList.contains('nav__button')) {
-                    const currentIndex = Array.from(navButtons).indexOf(e.target);
-                    let nextIndex;
-                    
-                    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                        e.preventDefault();
-                        nextIndex = currentIndex > 0 ? currentIndex - 1 : navButtons.length - 1;
-                    } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                        e.preventDefault();
-                        nextIndex = currentIndex < navButtons.length - 1 ? currentIndex + 1 : 0;
-                    } else if (e.key === 'Home') {
-                        e.preventDefault();
-                        nextIndex = 0;
-                    } else if (e.key === 'End') {
-                        e.preventDefault();
-                        nextIndex = navButtons.length - 1;
-                    }
-                    
-                    if (nextIndex !== undefined) {
-                        navButtons[nextIndex].focus();
-                    }
-                }
-            });
-            
-            // Back to top functionality
-            const backToTopButton = document.querySelector('.back-to-top');
-            
-            const toggleBackToTop = () => {
-                const scrolled = window.pageYOffset > 300;
-                backToTopButton.classList.toggle('back-to-top--visible', scrolled);
-            };
-            
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                document.querySelector('.skip-to-main').focus();
-            });
-            
-            // Scroll spy for navigation
-            const handleScroll = () => {
-                toggleBackToTop();
-                
-                // Simple scroll spy
-                const scrollPosition = window.pageYOffset + 200;
-                let currentSection = 'overview';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.offsetHeight;
-                    
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        if (section.classList.contains('section--active')) {
-                            currentSection = section.id;
-                        }
-                    }
-                });
-                
-                navButtons.forEach(button => {
-                    const isActive = button.getAttribute('data-section') === currentSection;
-                    button.classList.toggle('nav__button--active', isActive);
-                    button.setAttribute('aria-current', isActive ? 'page' : 'false');
-                });
-            };
-            
-            // Throttled scroll handler
-            let scrollTimeout;
-            window.addEventListener('scroll', () => {
-                if (scrollTimeout) {
-                    cancelAnimationFrame(scrollTimeout);
-                }
-                scrollTimeout = requestAnimationFrame(handleScroll);
-            }, { passive: true });
-            
-            // Media query change handler
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                if (!localStorage.getItem('theme')) {
-                    setTheme(e.matches ? 'dark' : 'light');
-                }
-            });
-            
-            // Initialize app
-            const init = () => {
-                initTheme();
-                toggleBackToTop();
-                
-                // Set initial ARIA states
-                sections.forEach((section, index) => {
-                    const isActive = index === 0;
-                    section.setAttribute('aria-hidden', !isActive);
-                });
-                
-                navButtons.forEach((button, index) => {
-                    button.setAttribute('aria-current', index === 0 ? 'page' : 'false');
-                });
-            };
-            
-            // Wait for DOM to be ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
-            
-            // Performance monitoring
-            if ('PerformanceObserver' in window) {
-                const observer = new PerformanceObserver((list) => {
-                    const entries = list.getEntries();
-                    entries.forEach((entry) => {
-                        if (entry.entryType === 'navigation') {
-                            console.log('Page load time:', entry.loadEventEnd - entry.loadEventStart);
-                        }
-                    });
-                });
-                
-                try {
-                    observer.observe({ entryTypes: ['navigation'] });
-                } catch (e) {
-                    // Fallback for browsers that don't support navigation timing
-                }
-            }
-        })();
+
+            // Seçilen section'ı göster
+            document.getElementById(sectionId).classList.add('active');
+
+            // Seçilen tab'ı aktif yap
+            event.target.classList.add('active');
+        }
+
+        // Sayfa yüklendiğinde ilk tab'ı aktif yap
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.nav-tab').classList.add('active');
+        });
     </script>
 </body>
 </html>
