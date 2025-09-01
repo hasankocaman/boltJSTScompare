@@ -53,6 +53,13 @@
             margin-bottom: 10px;
             object-fit: cover;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: #4a5568;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
         }
 
         .profile-name {
@@ -167,10 +174,17 @@
             width: 24px;
             height: 24px;
             border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
         }
 
         .js-icon {
             background: #f7df1e;
+            color: #333;
         }
 
         .ts-icon {
@@ -385,7 +399,7 @@
     <div class="container">
         <div class="header">
             <div class="profile-section">
-                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABwAHADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9k=" alt="Hasan Kocaman" class="profile-photo">
+                <div class="profile-photo">HK</div>
                 <div class="profile-name">Hasan Kocaman</div>
                 <div class="profile-title">Software Tester</div>
             </div>
@@ -411,7 +425,7 @@
             <h2 class="section-title">Genel Bakış</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
                     <ul class="feature-list">
                         <li>Dinamik tip sistemi</li>
                         <li>Runtime'da tip kontrolü</li>
@@ -421,7 +435,7 @@
                     </ul>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
                     <ul class="feature-list">
                         <li>Statik tip sistemi</li>
                         <li>Compile-time tip kontrolü</li>
@@ -443,7 +457,7 @@
             <h2 class="section-title">Temel Söz Dizimi Karşılaştırması</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
 <pre class="code-highlight">
 // Basit test yapısı
 describe('Login Tests', () => {
@@ -459,7 +473,7 @@ describe('Login Tests', () => {
 })</pre>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
 <pre class="code-highlight">
 // Tip tanımlamalı test yapısı
 describe('Login Tests', (): void => {
@@ -482,7 +496,7 @@ describe('Login Tests', (): void => {
             <h2 class="section-title">Değişken Tanımlama</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
 <pre class="code-highlight">
 // Değişken tanımlama
 const testData = {
@@ -497,7 +511,7 @@ var isLoggedIn = false
 const testUsers = ['user1', 'user2', 'user3']</pre>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
 <pre class="code-highlight">
 // Interface tanımı
 interface TestData {
@@ -528,7 +542,7 @@ const userRole: UserRole = 'admin'</pre>
             <h2 class="section-title">Fonksiyon Tanımlama</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
 <pre class="code-highlight">
 // Basit fonksiyon
 function loginUser(username, password) {
@@ -549,7 +563,7 @@ async function fetchUserData(userId) {
 }</pre>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
 <pre class="code-highlight">
 // Tip tanımlamalı fonksiyon
 function loginUser(username: string, password: string): void {
@@ -583,7 +597,7 @@ async function fetchUserData(userId: number): Promise<any> {
             <h2 class="section-title">Cypress Komutları</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
 <pre class="code-highlight">
 describe('Cypress Commands', () => {
   it('should handle API requests', () => {
@@ -606,7 +620,7 @@ Cypress.Commands.add('loginViaUI', (username, password) => {
 })</pre>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
 <pre class="code-highlight">
 // Tip güvenli API çağrısı
 interface LoginResponse {
@@ -643,7 +657,7 @@ declare global {
             <h2 class="section-title">Hata Yönetimi</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
 <pre class="code-highlight">
 // Basit hata yakalama
 it('should handle errors', () => {
@@ -661,7 +675,7 @@ Cypress.on('fail', (err, runnable) => {
 })</pre>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
 <pre class="code-highlight">
 // Tip güvenli hata yakalama
 it('should handle errors', (): void => {
@@ -696,7 +710,7 @@ Cypress.on('fail', (err: Error, runnable: Mocha.Runnable): boolean => {
             <h2 class="section-title">Proje Yapılandırması</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon"></div> JavaScript Projesi</h3>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript Projesi</h3>
                     <div class="file-structure">cypress-js-project/
 ├── cypress/
 │   ├── e2e/
@@ -723,7 +737,7 @@ module.exports = defineConfig({
 })</pre>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon"></div> TypeScript Projesi</h3>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript Projesi</h3>
                     <div class="file-structure">cypress-ts-project/
 ├── cypress/
 │   ├── e2e/
@@ -814,7 +828,7 @@ export default defineConfig({
             <h2 class="section-title">Performans Karşılaştırması</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon"></div> JavaScript</h3>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
                     <div>
                         <p><strong>Başlatma Süresi:</strong></p>
                         <div class="performance-meter">
@@ -835,7 +849,7 @@ export default defineConfig({
                     </div>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon"></div> TypeScript</h3>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
                     <div>
                         <p><strong>Başlatma Süresi:</strong></p>
                         <div class="performance-meter">
