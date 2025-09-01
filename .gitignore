@@ -24,5 +24,8 @@ dist-ssr
 *.sw?
 .env
 
-# Images folder
+# Images folder (ignored)
 images/
+
+# Public images (not ignored)
+!public/images/
