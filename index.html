@@ -8,7 +8,7 @@
     <link rel="canonical" href="https://boltjstscompare.pages.dev/" />
     
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="TypeScript vs JavaScript — Cypress Test Otomasyonu" />
+    <meta property="og:title" content="TypeScript vs JavaScript – Cypress Test Otomasyonu" />
     <meta property="og:description" content="JS ve TS kıyasını karar matrisiyle birlikte hızlıca karşılaştırın." />
     <meta property="og:url" content="https://boltjstscompare.pages.dev/" />
     <meta property="og:image" content="https://boltjstscompare.pages.dev/images/hasan.jpg" />
@@ -17,7 +17,7 @@
     <meta property="og:site_name" content="boltJSTScompare" />
     
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="TypeScript vs JavaScript — Cypress Karşılaştırması" />
+    <meta name="twitter:title" content="TypeScript vs JavaScript – Cypress Karşılaştırması" />
     <meta name="twitter:description" content="JS vs TS: Cypress test otomasyonu için pratik kıyas." />
     <meta name="twitter:image" content="https://boltjstscompare.pages.dev/images/hasan.jpg" />
     <style>
@@ -89,29 +89,60 @@
             position: relative;
         }
 
-        .profile-section {
+        /* Cypress Rehberi Butonu - Daha görünür pozisyon */
+        .cypress-guide-btn {
             position: absolute;
             top: 20px;
             right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .cypress-guide-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .cypress-guide-btn:active {
+            transform: translateY(0);
+        }
+
+        .profile-section {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             text-align: center;
             background: rgba(255, 255, 255, 0.1);
-            padding: 10px; /* Padding azaltıldı */
+            padding: 10px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            display: flex; /* İçerikleri yatayda sıralamak için flexbox kullanıldı */
-            flex-direction: column; /* İçerikleri dikeyde sırala */
-            align-items: center; /* Yatayda ortala */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .profile-photo {
-            width: 60px; /* Fotoğraf boyutu küçültüldü */
-            height: 60px; /* Fotoğraf boyutu küçültüldü */
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3); /* Border kalınlığı azaltıldı */
-            margin-bottom: 5px; /* Alt boşluk azaltıldı */
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 5px;
             object-fit: cover;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Gölge azaltıldı */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
             background: #4a5568;
         }
 
@@ -124,24 +155,24 @@
 
         .profile-name {
             color: white;
-            font-size: 0.9rem; /* Yazı boyutu küçültüldü */
+            font-size: 0.9rem;
             font-weight: 600;
-            margin: 3px 0; /* Boşluklar azaltıldı */
+            margin: 3px 0;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .profile-title {
             color: rgba(255, 255, 255, 0.9);
-            font-size: 0.75rem; /* Yazı boyutu küçültüldü */
+            font-size: 0.75rem;
             font-weight: 400;
             margin: 0;
         }
 
-        /* Theme Toggle Button */
+        /* Theme Toggle Button - Profile section yanına yerleştirildi */
         .theme-toggle {
             position: absolute;
             top: 20px;
-            left: 20px;
+            left: 150px; /* Profile section'ın sağ yanında olması için */
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
@@ -154,6 +185,7 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             color: var(--text-white);
+            z-index: 10;
         }
 
         .theme-toggle:hover {
@@ -169,6 +201,7 @@
         .theme-toggle .sun-icon,
         .theme-toggle .moon-icon {
             transition: opacity 0.3s ease, transform 0.3s ease;
+            position: absolute;
         }
 
         .theme-toggle .moon-icon {
@@ -353,7 +386,7 @@
         }
 
         .cons h4::before {
-            content: '❌';
+            content: '⚠';
         }
 
         .feature-list {
@@ -375,7 +408,7 @@
         }
 
         .cons .feature-list li::before {
-            content: '❌';
+            content: '⚠';
         }
 
         .recommendation-box {
@@ -470,14 +503,31 @@
                 font-size: 2rem;
             }
 
+            .header {
+                padding: 20px 0;
+            }
+
             .profile-section {
                 position: static;
                 margin-bottom: 20px;
-                display: inline-flex; /* flex olarak kalabilir, inline-block yerine */
+                display: inline-flex;
                 flex-direction: column;
                 align-items: center;
-                margin-left: auto; /* Ortalamak için */
-                margin-right: auto; /* Ortalamak için */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cypress-guide-btn {
+                position: static;
+                display: inline-block;
+                margin: 10px auto 20px auto;
+            }
+
+            .theme-toggle {
+                position: static;
+                margin: 0 auto 20px auto;
+                width: 45px;
+                height: 45px;
             }
 
             .profile-photo {
@@ -491,13 +541,6 @@
 
             .profile-title {
                 font-size: 0.75rem;
-            }
-
-            .theme-toggle {
-                position: static;
-                margin: 0 auto 20px auto;
-                width: 45px;
-                height: 45px;
             }
         }
 
@@ -526,6 +569,11 @@
 <body>
      <div class="container">
         <div class="header">
+            <!-- Cypress Guide Button - Daha görünür pozisyon -->
+            <a href="cypress-guide.html" class="cypress-guide-btn">
+                🚀 Cypress Test Rehberi
+            </a>
+
             <div class="profile-section">
                 <div class="profile-photo" id="profile-photo">
                     <img src="public/images/hasan.jpg" alt="Hasan Kocaman" onerror="handleImageError(this)">
@@ -534,7 +582,7 @@
                 <div class="profile-title">Software Tester</div>
             </div>
             
-            <!-- Dark Mode Toggle Button -->
+            <!-- Dark Mode Toggle Button - Profile section altına taşındı -->
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
                 <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="5"></circle>
@@ -779,10 +827,10 @@ interface LoginResponse {
 
 describe('Cypress Commands', (): void => {
   it('should handle API requests', (): void => {
-    cy.request&lt;LoginResponse&gt;('POST', '/api/login', {
+    cy.request<LoginResponse>('POST', '/api/login', {
       username: 'test@example.com',
       password: 'password'
-    }).then((response: Cypress.Response&lt;LoginResponse&gt;): void => {
+    }).then((response: Cypress.Response<LoginResponse>): void => {
       expect(response.status).to.eq(200)
       expect(response.body.user.email).to.be.a('string')
     })
@@ -793,10 +841,17 @@ describe('Cypress Commands', (): void => {
 declare global {
   namespace Cypress {
     interface Chainable {
-      loginViaUI(username: string, password: string): Chainable&lt;void&gt;
+      loginViaUI(username: string, password: string): Chainable<void>
     }
   }
-}</pre>
+}
+
+Cypress.Commands.add('loginViaUI', (username: string, password: string): void => {
+  cy.visit('/login')
+  cy.get('[data-cy=username]').type(username)
+  cy.get('[data-cy=password]').type(password)
+  cy.get('[data-cy=login-btn]').click()
+})</pre>
                 </div>
             </div>
         </div>
@@ -808,47 +863,59 @@ declare global {
                 <div class="lang-section javascript">
                     <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
 <pre class="code-highlight">
-// Basit hata yakalama
-it('should handle errors', () => {
-  try {
-    cy.get('.non-existent-element').click()
-  } catch (error) {
-    console.log('Element bulunamadı:', error)
-  }
-})
+describe('Error Handling', () => {
+  it('handles API errors', () => {
+    cy.request({
+      method: 'GET',
+      url: '/api/nonexistent',
+      failOnStatusCode: false
+    }).then((response) => {
+      if (response.status === 404) {
+        cy.log('Expected 404 error occurred')
+      }
+    })
+  })
 
-// Cypress hata yönetimi
-Cypress.on('fail', (err, runnable) => {
-  console.log('Test başarısız:', err.message)
-  return false
+  it('handles element not found', () => {
+    cy.visit('/page')
+    cy.get('.maybe-exists', {timeout: 1000})
+      .should('exist')
+      .catch(() => {
+        cy.log('Element not found, continuing...')
+      })
+  })
 })</pre>
                 </div>
                 <div class="lang-section typescript">
                     <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
 <pre class="code-highlight">
-// Tip güvenli hata yakalama
-it('should handle errors', (): void => {
-  try {
-    cy.get('.non-existent-element').click()
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.log('Element bulunamadı:', error.message)
-    }
-  }
-})
-
-// Custom hata sınıfı
-class TestError extends Error {
-  constructor(message: string, public testName: string) {
-    super(message)
-    this.name = 'TestError'
-  }
+interface ErrorResponse {
+  error: string;
+  code: number;
 }
 
-// Tip güvenli Cypress hata yönetimi
-Cypress.on('fail', (err: Error, runnable: Mocha.Runnable): boolean => {
-  console.log('Test başarısız:', err.message)
-  return false
+describe('Error Handling', (): void => {
+  it('handles API errors', (): void => {
+    cy.request<ErrorResponse>({
+      method: 'GET',
+      url: '/api/nonexistent',
+      failOnStatusCode: false
+    }).then((response: Cypress.Response<ErrorResponse>): void => {
+      if (response.status === 404) {
+        expect(response.body.error).to.be.a('string')
+        cy.log('Expected 404 error occurred')
+      }
+    })
+  })
+
+  it('handles element not found', (): void => {
+    cy.visit('/page')
+    cy.get('.maybe-exists', {timeout: 1000})
+      .should('exist')
+      .catch((): void => {
+        cy.log('Element not found, continuing...')
+      })
+  })
 })</pre>
                 </div>
             </div>
@@ -859,114 +926,119 @@ Cypress.on('fail', (err: Error, runnable: Mocha.Runnable): boolean => {
             <h2 class="section-title">Proje Yapılandırması</h2>
             <div class="comparison-grid">
                 <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon">JS</div> JavaScript Projesi</h3>
-                    <div class="file-structure">cypress-js-project/
-├── cypress/
-│   ├── e2e/
-│   │   └── login.cy.js
-│   ├── fixtures/
-│   │   └── users.json
-│   ├── support/
-│   │   ├── commands.js
-│   │   └── e2e.js
-│   └── downloads/
-├── cypress.config.js
-└── package.json</div>
+                    <h3><div class="lang-icon js-icon">JS</div> JavaScript Konfigürasyonu</h3>
 <pre class="code-highlight">
 // cypress.config.js
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://boltjstscompare.pages.dev',
+    baseUrl: 'http://localhost:3000',
+    supportFile: 'cypress/support/e2e.js',
+    specPattern: 'cypress/e2e/**/*.cy.{js,jsx}',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      // Plugin konfigürasyonları
     },
   },
 })</pre>
+                    <div class="file-structure">
+cypress/
+├── e2e/
+│   ├── login.cy.js
+│   └── dashboard.cy.js
+├── support/
+│   ├── commands.js
+│   └── e2e.js
+└── fixtures/
+    └── users.json</div>
                 </div>
                 <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript Projesi</h3>
-                    <div class="file-structure">cypress-ts-project/
-├── cypress/
-│   ├── e2e/
-│   │   └── login.cy.ts
-│   ├── fixtures/
-│   │   └── users.json
-│   ├── support/
-│   │   ├── commands.ts
-│   │   ├── e2e.ts
-│   │   └── index.d.ts
-│   └── downloads/
-├── cypress.config.ts
-├── tsconfig.json
-└── package.json</div>
+                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript Konfigürasyonu</h3>
 <pre class="code-highlight">
 // cypress.config.ts
 import { defineConfig } from 'cypress'
 
 export default defineConfig({
   e2e: {
-    baseUrl: 'https://boltjstscompare.pages.dev',
-    setupNodeEvents(on: Cypress.PluginEvents, 
-                   config: Cypress.PluginConfigOptions): void {
-      // implement node event listeners here
+    baseUrl: 'http://localhost:3000',
+    supportFile: 'cypress/support/e2e.ts',
+    specPattern: 'cypress/e2e/**/*.cy.{ts,tsx}',
+    setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) {
+      // Plugin konfigürasyonları
+      return config
     },
   },
-})</pre>
+})
+
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"]
+  },
+  "include": ["**/*.ts"]
+}</pre>
+                    <div class="file-structure">
+cypress/
+├── e2e/
+│   ├── login.cy.ts
+│   └── dashboard.cy.ts
+├── support/
+│   ├── commands.ts
+│   ├── e2e.ts
+│   └── index.d.ts
+└── fixtures/
+    └── users.json</div>
                 </div>
             </div>
         </div>
 
         <!-- Karşılaştırma -->
         <div id="comparison" class="content-section">
-            <h2 class="section-title">Avantajlar ve Dezavantajlar</h2>
-            
-            <h3>JavaScript</h3>
+            <h2 class="section-title">Detaylı Karşılaştırma</h2>
             <div class="pros-cons">
                 <div class="pros">
-                    <h4>Avantajlar</h4>
+                    <h4>JavaScript Avantajları</h4>
                     <ul class="feature-list">
-                        <li>Hızlı başlangıç</li>
-                        <li>Esnek yapı</li>
-                        <li>Daha az konfigürasyon</li>
+                        <li>Hızlı başlangıç, kurulum gerektirmez</li>
+                        <li>Esnek ve dinamik yapı</li>
                         <li>Geniş topluluk desteği</li>
-                        <li>Runtime'da dinamik değişiklikler</li>
+                        <li>Daha az boilerplate kod</li>
+                        <li>Runtime'da tip değişikliği mümkün</li>
                     </ul>
                 </div>
                 <div class="cons">
-                    <h4>Dezavantajlar</h4>
+                    <h4>JavaScript Dezavantajları</h4>
                     <ul class="feature-list">
-                        <li>Runtime hataları</li>
+                        <li>Runtime hataları daha fazla</li>
+                        <li>IDE desteği sınırlı</li>
+                        <li>Büyük projelerde maintainability sorunu</li>
                         <li>Tip güvenliği yok</li>
-                        <li>IntelliSense desteği sınırlı</li>
-                        <li>Refactoring zorluğu</li>
-                        <li>Büyük projelerde bakım zorluğu</li>
+                        <li>Refactoring zorluklarï</li>
                     </ul>
                 </div>
             </div>
 
-            <h3>TypeScript</h3>
             <div class="pros-cons">
                 <div class="pros">
-                    <h4>Avantajlar</h4>
+                    <h4>TypeScript Avantajları</h4>
                     <ul class="feature-list">
-                        <li>Tip güvenliği</li>
-                        <li>Compile-time hata yakalama</li>
-                        <li>Mükemmel IntelliSense desteği</li>
-                        <li>Kolay refactoring</li>
-                        <li>Daha iyi kod dokumentasyonu</li>
-                        <li>Büyük projelerde bakım kolaylığı</li>
+                        <li>Compile-time tip kontrolü</li>
+                        <li>Mükemmel IDE desteği</li>
+                        <li>Daha güvenli refactoring</li>
+                        <li>İyi dokümantasyon desteği</li>
+                        <li>Büyük projeler için ideal</li>
                     </ul>
                 </div>
                 <div class="cons">
-                    <h4>Dezavantajlar</h4>
+                    <h4>TypeScript Dezavantajları</h4>
                     <ul class="feature-list">
-                        <li>Öğrenme eğrisi</li>
-                        <li>Daha fazla konfigürasyon</li>
-                        <li>Derleme süreci</li>
-                        <li>Daha fazla kod yazma</li>
-                        <li>Bazen aşırı karmaşık tip tanımları</li>
+                        <li>Öğrenme eğrisi var</li>
+                        <li>Ek konfigürasyon gerekir</li>
+                        <li>Daha fazla boilerplate kod</li>
+                        <li>Compile süresi</li>
+                        <li>Bazı kütüphaneler için tip tanımı gerekir</li>
                     </ul>
                 </div>
             </div>
@@ -975,49 +1047,43 @@ export default defineConfig({
         <!-- Performans -->
         <div id="performance" class="content-section">
             <h2 class="section-title">Performans Karşılaştırması</h2>
-            <div class="comparison-grid">
-                <div class="lang-section javascript">
-                    <h3><div class="lang-icon js-icon">JS</div> JavaScript</h3>
-                    <div>
-                        <p><strong>Başlatma Süresi:</strong></p>
-                        <div class="performance-meter">
-                            <div class="performance-bar fast" style="width: 90%"></div>
-                        </div>
-                        <p><strong>Derleme:</strong> Yok</p>
-                        <div class="performance-meter">
-                            <div class="performance-bar fast" style="width: 100%"></div>
-                        </div>
-                        <p><strong>Çalışma Süresi:</strong></p>
-                        <div class="performance-meter">
-                            <div class="performance-bar fast" style="width: 95%"></div>
-                        </div>
-                        <p><strong>Bellek Kullanımı:</strong></p>
-                        <div class="performance-meter">
-                            <div class="performance-bar fast" style="width: 85%"></div>
-                        </div>
-                    </div>
+            <div style="margin: 20px 0;">
+                <h4>Geliştirme Hızı</h4>
+                <div class="performance-meter">
+                    <div class="performance-bar fast" style="width: 85%"></div>
                 </div>
-                <div class="lang-section typescript">
-                    <h3><div class="lang-icon ts-icon">TS</div> TypeScript</h3>
-                    <div>
-                        <p><strong>Başlatma Süresi:</strong></p>
-                        <div class="performance-meter">
-                            <div class="performance-bar medium" style="width: 70%"></div>
-                        </div>
-                        <p><strong>Derleme:</strong> Var</p>
-                        <div class="performance-meter">
-                            <div class="performance-bar slow" style="width: 60%"></div>
-                        </div>
-                        <p><strong>Çalışma Süresi:</strong></p>
-                        <div class="performance-meter">
-                            <div class="performance-bar fast" style="width: 95%"></div>
-                        </div>
-                        <p><strong>Bellek Kullanımı:</strong></p>
-                        <div class="performance-meter">
-                            <div class="performance-bar medium" style="width: 75%"></div>
-                        </div>
-                    </div>
+                <p>JavaScript: %85 - Hızlı başlangıç</p>
+                
+                <div class="performance-meter">
+                    <div class="performance-bar medium" style="width: 65%"></div>
                 </div>
+                <p>TypeScript: %65 - Başlangıç yavaş, sonrası hızlı</p>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <h4>Hata Yakalama</h4>
+                <div class="performance-meter">
+                    <div class="performance-bar medium" style="width: 40%"></div>
+                </div>
+                <p>JavaScript: %40 - Runtime'da hata yakalama</p>
+                
+                <div class="performance-meter">
+                    <div class="performance-bar fast" style="width: 90%"></div>
+                </div>
+                <p>TypeScript: %90 - Compile-time hata yakalama</p>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <h4>Maintainability</h4>
+                <div class="performance-meter">
+                    <div class="performance-bar slow" style="width: 35%"></div>
+                </div>
+                <p>JavaScript: %35 - Büyük projelerde zorlu</p>
+                
+                <div class="performance-meter">
+                    <div class="performance-bar fast" style="width: 85%"></div>
+                </div>
+                <p>TypeScript: %85 - Mükemmel maintainability</p>
             </div>
         </div>
 
@@ -1026,114 +1092,143 @@ export default defineConfig({
             <h2 class="section-title">Öneriler ve Sonuç</h2>
             
             <div class="recommendation-box">
-                <h3>🎯 Genel Tavsiye</h3>
-                <p>Cypress öğrenirken JavaScript ile başlayıp, deneyim kazandıkça TypeScript'e geçiş yapmak ideal bir yaklaşım olabilir.</p>
+                <h3>🎯 Ne Zaman JavaScript?</h3>
+                <p>Küçük projeler, hızlı prototipleme, öğrenme amaçlı projeler ve başlangıç seviyesindeki ekipler için JavaScript ideal bir seçimdir.</p>
             </div>
 
-            <div class="comparison-grid">
-                <div class="lang-section javascript">
-                    <h3>JavaScript Kullanımı Önerilir:</h3>
-                    <ul class="feature-list">
-                        <li>Küçük ve orta ölçekli projeler</li>
-                        <li>Hızlı prototipleme</li>
-                        <li>Başlangıç seviyesi ekipler</li>
-                        <li>Basit test senaryoları</li>
-                        <li>Hızlı MVP geliştirme</li>
-                    </ul>
-                </div>
-                <div class="lang-section typescript">
-                    <h3>TypeScript Kullanımı Önerilir:</h3>
-                    <ul class="feature-list">
-                        <li>Büyük ölçekli projeler</li>
-                        <li>Kurumsal uygulamalar</li>
-                        <li>Deneyimli geliştirici ekipleri</li>
-                        <li>Kompleks test senaryoları</li>
-                        <li>Uzun vadeli bakım gerektiren projeler</li>
-                    </ul>
-                </div>
+            <div class="recommendation-box" style="background: linear-gradient(135deg, #3178c6, #2868c7);">
+                <h3>🚀 Ne Zaman TypeScript?</h3>
+                <p>Büyük ölçekli projeler, kurumsal uygulamalar, uzun vadeli bakım gerektiren projeler ve deneyimli ekipler için TypeScript önerilir.</p>
             </div>
 
             <div class="highlight-box">
-                <h4>💡 Sonuç</h4>
-                <p>Her iki yaklaşımın da kendine özgü avantajları vardır. JavaScript basitlik ve hızlı başlangıç sunarken, TypeScript tip güvenliği ve daha iyi kod kalitesi sağlar. Proje gereksinimlerinize, ekip deneyiminize ve uzun vadeli hedeflerinize göre seçim yapmanız önerilir.</p>
+                <h4>💡 Pro İpuçları</h4>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>✅ TypeScript ile başlıyorsanız, yavaş yavaş strict modu açın</li>
+                    <li>✅ Custom Cypress komutlarınız için mutlaka tip tanımları yazın</li>
+                    <li>✅ Fixture dosyalarınız için interface tanımları kullanın</li>
+                    <li>✅ Page Object Pattern ile testlerinizi organize edin</li>
+                    <li>✅ ESLint ve Prettier kullanarak kod kalitesini artırın</li>
+                </ul>
+            </div>
+
+            <div style="background: var(--bg-tertiary); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent-color);">
+                <h4>📊 Karar Matrisi</h4>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                    <tr style="background: var(--accent-color); color: white;">
+                        <th style="padding: 10px; text-align: left;">Kriter</th>
+                        <th style="padding: 10px; text-align: center;">JavaScript</th>
+                        <th style="padding: 10px; text-align: center;">TypeScript</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">Öğrenme Kolaylığı</td>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">⭐⭐⭐⭐⭐</td>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">Hata Yakalama</td>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">⭐⭐</td>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">IDE Desteği</td>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">⭐⭐⭐</td>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">Büyük Projeler</td>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">⭐⭐</td>
+                        <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px;">Hız (Başlangıç)</td>
+                        <td style="padding: 8px; text-align: center;">⭐⭐⭐⭐⭐</td>
+                        <td style="padding: 8px; text-align: center;">⭐⭐⭐</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
 
     <script>
-        // Theme Management
-        class ThemeManager {
-            constructor() {
-                this.themeToggle = document.getElementById('theme-toggle');
-                this.currentTheme = this.getStoredTheme() || this.getSystemTheme();
-                this.init();
-            }
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
 
-            getStoredTheme() {
-                return localStorage.getItem('theme');
-            }
+        // Sayfa yüklendiğinde tema durumunu kontrol et
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
 
-            getSystemTheme() {
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
 
-            setTheme(theme) {
-                this.currentTheme = theme;
-                document.documentElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                this.updateToggleButton();
-            }
-
-            toggleTheme() {
-                const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-                this.setTheme(newTheme);
-            }
-
-            updateToggleButton() {
-                if (this.currentTheme === 'dark') {
-                    this.themeToggle.setAttribute('aria-label', 'Switch to light mode');
-                } else {
-                    this.themeToggle.setAttribute('aria-label', 'Switch to dark mode');
-                }
-            }
-
-            init() {
-                this.setTheme(this.currentTheme);
-                this.themeToggle.addEventListener('click', () => this.toggleTheme());
-                
-                // Listen for system theme changes
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                    if (!this.getStoredTheme()) {
-                        this.setTheme(e.matches ? 'dark' : 'light');
-                    }
-                });
-            }
+        // Image Error Handler
+        function handleImageError(img) {
+            img.style.display = 'none';
+            const placeholder = document.createElement('div');
+            placeholder.style.width = '60px';
+            placeholder.style.height = '60px';
+            placeholder.style.borderRadius = '50%';
+            placeholder.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            placeholder.style.display = 'flex';
+            placeholder.style.alignItems = 'center';
+            placeholder.style.justifyContent = 'center';
+            placeholder.style.color = 'white';
+            placeholder.style.fontSize = '24px';
+            placeholder.style.fontWeight = 'bold';
+            placeholder.innerHTML = 'HK';
+            img.parentNode.replaceChild(placeholder, img);
         }
 
+        // Tab Navigation
         function showSection(sectionId) {
-            // Tüm section'ları gizle
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
+            // Tüm sekmeleri gizle
+            document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
-
-            // Tüm tab'ları pasif yap
-            const tabs = document.querySelectorAll('.nav-tab');
-            tabs.forEach(tab => {
+            
+            // Tüm tab butonlarını pasif yap
+            document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-
-            // Seçilen section'ı göster
+            
+            // Seçili sekmeyi göster
             document.getElementById(sectionId).classList.add('active');
-
-            // Seçilen tab'ı aktif yap
+            
+            // Seçili tab butonunu aktif yap
             event.target.classList.add('active');
         }
 
-        // Sayfa yüklendiğinde ilk tab'ı aktif yap ve theme manager'ı başlat
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('.nav-tab').classList.add('active');
-            new ThemeManager();
+        // Syntax Demo Toggle (eğer gelecekte eklenecekse)
+        function toggleSyntax(type) {
+            document.querySelectorAll('.syntax-demo').forEach(demo => {
+                demo.classList.remove('active');
+            });
+            document.querySelectorAll('.toggle-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(type + '-demo').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
