@@ -12,21 +12,17 @@
         :root {
             /* Light Theme Colors */
             --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --bg-secondary: rgba(255, 255, 255, 0.95);
+            --bg-secondary: #ffffff;
             --bg-tertiary: #f8f9fa;
-            --text-primary: #333;
-            --text-secondary: #666;
+            --text-primary: #333333;
+            --text-secondary: #666666;
             --text-white: #ffffff;
-            --border-color: #e9ecef;
+            --border-color: #dee2e6;
             --shadow-color: rgba(0, 0, 0, 0.1);
             --accent-color: #4A90E2;
             --success-color: #4CAF50;
-            --warning-color: #856404;
-            --info-color: #0c5460;
-            --warning-bg: #fff3cd;
-            --warning-border: #ffeaa7;
-            --info-bg: #d1ecf1;
-            --info-border: #bee5eb;
+            --warning-color: #FF9800;
+            --error-color: #f44336;
             --code-bg: #2d3748;
             --code-text: #e2e8f0;
             --code-border: #4a5568;
@@ -38,7 +34,7 @@
         /* Dark Theme Colors */
         [data-theme="dark"] {
             --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            --bg-secondary: rgba(30, 30, 46, 0.95);
+            --bg-secondary: #1e1e2e;
             --bg-tertiary: #2d2d3f;
             --text-primary: #e2e8f0;
             --text-secondary: #a0aec0;
@@ -48,17 +44,13 @@
             --accent-color: #63b3ed;
             --success-color: #68d391;
             --warning-color: #f6ad55;
-            --info-color: #63b3ed;
-            --warning-bg: #2d2017;
-            --warning-border: #3d2f1f;
-            --info-bg: #1a2332;
-            --info-border: #2c3e50;
+            --error-color: #fc8181;
             --code-bg: #1a202c;
             --code-text: #e2e8f0;
             --code-border: #4a5568;
-            --terminal-bg: #0d1117;
-            --terminal-text: #58a6ff;
-            --terminal-prompt: #f1e05a;
+            --terminal-bg: #0a0a0a;
+            --terminal-text: #00ff00;
+            --terminal-prompt: #ffff00;
         }
 
         * {
@@ -85,6 +77,7 @@
             text-align: center;
             margin-bottom: 40px;
             color: var(--text-white);
+            position: relative;
         }
 
         .header h1 {
@@ -100,14 +93,14 @@
 
         /* Theme Toggle Button */
         .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -115,14 +108,13 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             color: var(--text-white);
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
         }
 
         .theme-toggle:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .theme-toggle:active {
@@ -200,8 +192,8 @@
             margin-bottom: 30px;
             box-shadow: 0 10px 30px var(--shadow-color);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+            transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .section-title {
@@ -210,6 +202,7 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--accent-color);
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
 
         .subsection-title {
@@ -218,6 +211,7 @@
             margin-top: 25px;
             margin-bottom: 15px;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
 
         .code-container {
@@ -229,12 +223,13 @@
         }
 
         .code-header {
-            background: var(--code-bg);
-            filter: brightness(0.8);
+            background: var(--code-border);
             padding: 10px 15px;
             color: var(--code-text);
             font-size: 0.9em;
             border-bottom: 1px solid var(--code-border);
+            position: relative;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         pre {
@@ -242,13 +237,12 @@
             padding: 20px !important;
             background: var(--code-bg) !important;
             border-radius: 0 !important;
-            color: var(--code-text);
+            transition: background 0.3s ease;
         }
 
         code {
             font-family: 'Fira Code', 'Courier New', monospace;
             font-size: 14px;
-            color: var(--code-text);
         }
 
         .terminal-cmd {
@@ -259,7 +253,7 @@
             font-family: 'Courier New', monospace;
             margin: 15px 0;
             position: relative;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .terminal-cmd:before {
@@ -273,10 +267,6 @@
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
-        }
-
-        [data-theme="dark"] .highlight-box {
-            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
         }
 
         .highlight-box h3 {
@@ -320,7 +310,7 @@
             padding: 20px;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .toc ul {
@@ -345,23 +335,21 @@
         }
 
         .warning {
-            background: var(--warning-bg);
-            border: 1px solid var(--warning-border);
-            color: var(--warning-color);
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
             padding: 15px;
             border-radius: 8px;
             margin: 15px 0;
-            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 
         .info {
-            background: var(--info-bg);
-            border: 1px solid var(--info-border);
-            color: var(--info-color);
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
             padding: 15px;
             border-radius: 8px;
             margin: 15px 0;
-            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 
         .step-number {
@@ -375,6 +363,7 @@
             justify-content: center;
             font-weight: bold;
             margin-right: 10px;
+            transition: background 0.3s ease;
         }
 
         @media (max-width: 768px) {
@@ -396,10 +385,10 @@
             }
 
             .theme-toggle {
-                width: 50px;
-                height: 50px;
-                top: 15px;
-                right: 15px;
+                position: relative;
+                margin: 0 auto 20px auto;
+                top: 0;
+                right: 0;
             }
         }
 
@@ -440,27 +429,28 @@
 <body>
     <div class="progress-bar" id="progressBar"></div>
     
-    <!-- Theme Toggle Button -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="sun-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="moon-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-    </button>
-    
     <div class="container">
-        <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
+        <a href="https://hasankocaman.github.io/boltJSTScompare/" class="back-btn">← Ana Sayfaya Dön</a>
+        
         <div class="header">
+            <!-- Dark Mode Toggle Button -->
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+            
             <h1>🚀 Cypress Kurulum ve Test Rehberi</h1>
             <p class="subtitle">Modern Web Uygulamaları için End-to-End Test Otomasyonu</p>
         </div>
@@ -541,6 +531,468 @@
                 <div class="terminal-cmd"># Veya yarn kullanıyorsanız</div>
                 <div class="terminal-cmd">yarn add --dev cypress</div>
             </div>
+
+            <div class="subsection-title">
+                <span class="step-number">4</span>İlk Çalıştırma
+            </div>
+            
+            <div class="code-container">
+                <div class="code-header">Terminal - Cypress Başlatma</div>
+                <div class="terminal-cmd">npx cypress open</div>
+                <div class="terminal-cmd"># Veya headless modda</div>
+                <div class="terminal-cmd">npx cypress run</div>
+            </div>
+
+            <div class="subsection-title">
+                <span class="step-number">5</span>package.json Konfigürasyonu
+            </div>
+            
+            <div class="code-container">
+                <div class="code-header">package.json</div>
+                <pre><code class="language-json">{
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:chrome": "cypress run --browser chrome",
+    "cypress:run:firefox": "cypress run --browser firefox"
+  }
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="content-card" id="proje-yapisi">
+            <h2 class="section-title">📁 Proje Yapısı</h2>
+            
+            <div class="folder-structure">
+cypress-test-project/
+├── cypress/
+│   ├── e2e/                 # Test dosyaları
+│   ├── fixtures/            # Test verileri (JSON)
+│   ├── support/            # Yardımcı dosyalar
+│   │   ├── commands.js     # Custom komutlar
+│   │   └── e2e.js         # Global ayarlar
+│   └── downloads/         # İndirilen dosyalar
+├── cypress.config.js      # Cypress ayarları
+└── package.json
+            </div>
+
+            <div class="subsection-title">cypress.config.js Örnek Konfigürasyon</div>
+            
+            <div class="code-container">
+                <div class="code-header">cypress.config.js</div>
+                <pre><code class="language-javascript">const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    baseUrl: 'http://localhost:3000',
+    viewportWidth: 1280,
+    viewportHeight: 720,
+    defaultCommandTimeout: 10000,
+    requestTimeout: 10000,
+    responseTimeout: 10000,
+    video: true,
+    screenshotOnRunFailure: true,
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
+  },
+})</code></pre>
+            </div>
+        </div>
+
+        <div class="content-card" id="ilk-test">
+            <h2 class="section-title">🚀 İlk Test Yazımı</h2>
+            
+            <div class="code-container">
+                <div class="code-header">cypress/e2e/first-test.cy.js</div>
+                <pre><code class="language-javascript">describe('İlk Test Suitesi', () => {
+  it('Google ana sayfasını ziyaret eder', () => {
+    cy.visit('https://www.google.com')
+    cy.title().should('contain', 'Google')
+    cy.get('[name="q"]').should('be.visible')
+  })
+
+  it('Google aramasi yapar', () => {
+    cy.visit('https://www.google.com')
+    cy.get('[name="q"]')
+      .type('Cypress testing{enter}')
+    
+    cy.url().should('include', 'search')
+    cy.get('#search').should('be.visible')
+  })
+})</code></pre>
+            </div>
+
+            <div class="info">
+                <strong>💡 Test Çalıştırma:</strong><br>
+                • GUI modunda: <code>npm run cypress:open</code><br>
+                • Headless modda: <code>npm run cypress:run</code>
+            </div>
+        </div>
+
+        <div class="content-card" id="ui-testleri">
+            <h2 class="section-title">🖥️ UI Testleri</h2>
+            
+            <div class="subsection-title">Element Seçiciler</div>
+            
+            <div class="code-container">
+                <div class="code-header">Element Seçim Örnekleri</div>
+                <pre><code class="language-javascript">describe('Element Seçiciler', () => {
+  beforeEach(() => {
+    cy.visit('https://example.com')
+  })
+
+  it('Çeşitli seçiciler kullanır', () => {
+    // ID ile seçim
+    cy.get('#my-id')
+    
+    // Class ile seçim
+    cy.get('.my-class')
+    
+    // Attribute ile seçim
+    cy.get('[data-cy="submit-button"]')
+    
+    // Text içeriği ile seçim
+    cy.contains('Giriş Yap')
+    
+    // CSS seçici
+    cy.get('button.primary')
+    
+    // İlk/son element
+    cy.get('li').first()
+    cy.get('li').last()
+    
+    // Index ile seçim
+    cy.get('li').eq(2)
+  })
+})</code></pre>
+            </div>
+
+            <div class="subsection-title">Form İşlemleri</div>
+            
+            <div class="code-container">
+                <div class="code-header">Form Test Örneği</div>
+                <pre><code class="language-javascript">describe('Form Testleri', () => {
+  it('Login formu doldurur ve gönderir', () => {
+    cy.visit('/login')
+    
+    // Input alanlarını doldur
+    cy.get('[data-cy="username"]').type('testuser')
+    cy.get('[data-cy="password"]').type('password123')
+    
+    // Checkbox işaretle
+    cy.get('[data-cy="remember-me"]').check()
+    
+    // Select dropdown
+    cy.get('[data-cy="country"]').select('Turkey')
+    
+    // Radio button seç
+    cy.get('[data-cy="gender"][value="male"]').check()
+    
+    // Form gönder
+    cy.get('[data-cy="submit"]').click()
+    
+    // Sonucu kontrol et
+    cy.url().should('include', '/dashboard')
+    cy.contains('Hoş geldiniz').should('be.visible')
+  })
+})</code></pre>
+            </div>
+
+            <div class="subsection-title">Etkileşim Testleri</div>
+            
+            <div class="code-container">
+                <div class="code-header">Etkileşim Örnekleri</div>
+                <pre><code class="language-javascript">describe('Etkileşim Testleri', () => {
+  it('Çeşitli etkileşimler gerçekleştirir', () => {
+    cy.visit('/interactive-page')
+    
+    // Hover efekti
+    cy.get('.menu-item').trigger('mouseover')
+    
+    // Double click
+    cy.get('.double-click-area').dblclick()
+    
+    // Sağ tık
+    cy.get('.context-menu').rightclick()
+    
+    // Scroll işlemi
+    cy.get('.long-content').scrollTo('bottom')
+    cy.scrollTo(0, 500)
+    
+    // File upload
+    cy.get('input[type="file"]').attachFile('example.pdf')
+  })
+})</code></pre>
+            </div>
+        </div>
+
+        <div class="content-card" id="api-testleri">
+            <h2 class="section-title">🔗 API Testleri</h2>
+            
+            <div class="subsection-title">Temel API Testleri</div>
+            
+            <div class="code-container">
+                <div class="code-header">API Test Örnekleri</div>
+                <pre><code class="language-javascript">describe('API Testleri', () => {
+  const baseUrl = 'https://jsonplaceholder.typicode.com'
+  
+  it('GET request testi', () => {
+    cy.request({
+      method: 'GET',
+      url: `${baseUrl}/posts/1`
+    }).then((response) => {
+      expect(response.status).to.eq(200)
+      expect(response.body).to.have.property('id', 1)
+      expect(response.body).to.have.property('title')
+      expect(response.body.userId).to.be.a('number')
+    })
+  })
+  
+  it('POST request testi', () => {
+    const newPost = {
+      title: 'Test Başlık',
+      body: 'Test içerik',
+      userId: 1
+    }
+    
+    cy.request({
+      method: 'POST',
+      url: `${baseUrl}/posts`,
+      body: newPost,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      expect(response.status).to.eq(201)
+      expect(response.body.title).to.eq(newPost.title)
+      expect(response.body.body).to.eq(newPost.body)
+      expect(response.body.id).to.be.a('number')
+    })
+  })
+})</code></pre>
+            </div>
+
+            <div class="subsection-title">Authentication Testleri</div>
+            
+            <div class="code-container">
+                <div class="code-header">Token-based Authentication</div>
+                <pre><code class="language-javascript">describe('Authentication API Testleri', () => {
+  let authToken
+  
+  before(() => {
+    // Login yaparak token al
+    cy.request({
+      method: 'POST',
+      url: '/api/login',
+      body: {
+        username: 'testuser',
+        password: 'password123'
+      }
+    }).then((response) => {
+      authToken = response.body.token
+    })
+  })
+  
+  it('Protected endpoint test', () => {
+    cy.request({
+      method: 'GET',
+      url: '/api/protected-data',
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    }).then((response) => {
+      expect(response.status).to.eq(200)
+      expect(response.body).to.have.property('data')
+    })
+  })
+})</code></pre>
+            </div>
+        </div>
+
+        <div class="content-card" id="pratikler">
+            <h2 class="section-title">⭐ En İyi Pratikler</h2>
+            
+            <div class="subsection-title">1. Data Attributes Kullanımı</div>
+            
+            <div class="code-container">
+                <div class="code-header">HTML - İyi Uygulama</div>
+                <pre><code class="language-html">&lt;!-- İyi --&gt;
+&lt;button data-cy="submit-button"&gt;Gönder&lt;/button&gt;
+
+&lt;!-- Kötü --&gt;
+&lt;button class="btn btn-primary submit-btn"&gt;Gönder&lt;/button&gt;</code></pre>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">JavaScript - Test Kodu</div>
+                <pre><code class="language-javascript">// İyi
+cy.get('[data-cy="submit-button"]').click()
+
+// Kötü
+cy.get('.btn.btn-primary.submit-btn').click()</code></pre>
+            </div>
+
+            <div class="subsection-title">2. Custom Commands</div>
+            
+            <div class="code-container">
+                <div class="code-header">cypress/support/commands.js</div>
+                <pre><code class="language-javascript">Cypress.Commands.add('login', (username, password) => {
+  cy.visit('/login')
+  cy.get('[data-cy="username"]').type(username)
+  cy.get('[data-cy="password"]').type(password)
+  cy.get('[data-cy="login-button"]').click()
+})
+
+// Kullanım
+cy.login('testuser', 'password123')</code></pre>
+            </div>
+
+            <div class="subsection-title">3. Fixture Verilerini Kullanma</div>
+            
+            <div class="code-container">
+                <div class="code-header">cypress/fixtures/users.json</div>
+                <pre><code class="language-json">{
+  "validUser": {
+    "username": "testuser",
+    "password": "password123",
+    "email": "test@example.com"
+  },
+  "invalidUser": {
+    "username": "wronguser",
+    "password": "wrongpass"
+  }
+}</code></pre>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">Test Dosyasında Kullanım</div>
+                <pre><code class="language-javascript">describe('Login Testleri', () => {
+  beforeEach(() => {
+    cy.fixture('users').as('userData')
+  })
+  
+  it('Geçerli kullanıcı ile giriş yapar', function() {
+    cy.visit('/login')
+    cy.get('[data-cy="username"]').type(this.userData.validUser.username)
+    cy.get('[data-cy="password"]').type(this.userData.validUser.password)
+    cy.get('[data-cy="login-button"]').click()
+  })
+})</code></pre>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Önemli Not:</strong> Fixture verilerini kullanırken arrow function yerine normal function kullanmaya dikkat edin (<code>function()</code> yerine <code>() =></code> kullanmayın) çünkü <code>this</code> context'i gereklidir.
+            </div>
+        </div>
+
+        <div class="content-card" id="komutlar">
+            <h2 class="section-title">🛠️ Faydalı Komutlar</h2>
+            
+            <div class="subsection-title">Debug Komutları</div>
+            
+            <div class="code-container">
+                <div class="code-header">Debug İşlemleri</div>
+                <pre><code class="language-javascript">// Debug için duraklatma
+cy.debug()
+
+// Console'a log yazdırma
+cy.log('Bu bir log mesajıdır')
+
+// Pause komutu
+cy.pause()
+
+// Screenshot alma
+cy.screenshot()
+cy.screenshot('login-page')</code></pre>
+            </div>
+
+            <div class="subsection-title">Environment Variables</div>
+            
+            <div class="code-container">
+                <div class="code-header">cypress.config.js</div>
+                <pre><code class="language-javascript">module.exports = defineConfig({
+  e2e: {
+    env: {
+      apiUrl: 'https://api.example.com',
+      username: 'testuser'
+    }
+  }
+})
+
+// Test dosyasında kullanım
+cy.visit(Cypress.env('apiUrl'))
+cy.get('[data-cy="username"]').type(Cypress.env('username'))</code></pre>
+            </div>
+
+            <div class="subsection-title">Test Verilerini Temizleme</div>
+            
+            <div class="code-container">
+                <div class="code-header">Cleanup İşlemleri</div>
+                <pre><code class="language-javascript">describe('Test Suite', () => {
+  beforeEach(() => {
+    // Her testten önce verileri temizle
+    cy.task('cleanDatabase')
+    cy.clearCookies()
+    cy.clearLocalStorage()
+  })
+  
+  afterEach(() => {
+    // Her testten sonra screenshot al (hata durumunda)
+    cy.screenshot()
+  })
+})</code></pre>
+            </div>
+
+            <div class="subsection-title">Paralel Test Çalıştırma</div>
+            
+            <div class="code-container">
+                <div class="code-header">Terminal - Paralel Çalıştırma</div>
+                <div class="terminal-cmd">npm install --save-dev cypress-parallel</div>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">package.json</div>
+                <pre><code class="language-json">{
+  "scripts": {
+    "cypress:parallel": "cypress-parallel -s cypress:run -t 2 -d cypress/e2e"
+  }
+}</code></pre>
+            </div>
+
+            <div class="subsection-title">Assertions ve Beklemeler</div>
+            
+            <div class="code-container">
+                <div class="code-header">Çeşitli Assertion Örnekleri</div>
+                <pre><code class="language-javascript">describe('Beklemeler ve Doğrulamalar', () => {
+  it('Çeşitli bekleme ve doğrulamalar yapar', () => {
+    cy.visit('/dynamic-content')
+    
+    // Element görünür olana kadar bekle
+    cy.get('.loading').should('be.visible')
+    cy.get('.content').should('be.visible')
+    cy.get('.loading').should('not.exist')
+    
+    // Text kontrolü
+    cy.get('h1').should('contain.text', 'Başlık')
+    cy.get('h1').should('have.text', 'Tam Başlık Metni')
+    
+    // Attribute kontrolü
+    cy.get('input').should('have.attr', 'placeholder', 'Email giriniz')
+    cy.get('button').should('have.class', 'btn-primary')
+    
+    // CSS property kontrolü
+    cy.get('.box').should('have.css', 'color', 'rgb(255, 0, 0)')
+    
+    // URL kontrolü
+    cy.url().should('eq', 'https://example.com/page')
+    cy.location('pathname').should('eq', '/page')
+    
+    // Custom timeout
+    cy.get('.slow-loading', { timeout: 15000 }).should('be.visible')
+  })
+})</code></pre>
+            </div>
         </div>
 
         <div class="content-card">
@@ -557,28 +1009,37 @@
                     <li>Page Object Pattern ile test kodunuzu maintainable hale getirin</li>
                 </ul>
             </div>
+
+            <div class="info">
+                <strong>📚 Daha Fazla Kaynak:</strong><br>
+                • <a href="https://docs.cypress.io/" target="_blank">Cypress Resmi Dokümantasyonu</a><br>
+                • <a href="https://docs.cypress.io/guides/references/best-practices" target="_blank">Cypress Best Practices</a><br>
+                • <a href="https://docs.cypress.io/plugins/directory" target="_blank">Cypress Plugins</a>
+            </div>
+
+            <div class="warning">
+                <strong>💡 Pro İpucu:</strong> Cypress ile test yazmaya başladığınızda, sürekli pratik yaparak ve topluluktan destek alarak becerilerinizi geliştirebilirsiniz. Test-Driven Development (TDD) yaklaşımını benimser ve testlerinizi kodunuzdan önce yazarsanız, daha kaliteli ve güvenilir uygulamalar geliştirebilirsiniz.
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">📞 Destek ve İletişim</h2>
+            <p>Bu rehberle ilgili sorularınız için:</p>
+            <ul>
+                <li>GitHub: <a href="https://github.com/hasankocaman" target="_blank">@hasankocaman</a></li>
+                <li>Ana Proje: <a href="https://hasankocaman.github.io/boltJSTScompare/" target="_blank">TypeScript vs JavaScript Karşılaştırması</a></li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p>🎉 <strong>Cypress ile test yazmaya başlamak için tüm bilgilere sahipsiniz!</strong></p>
+                <p>Bu rehberi takip ederek modern web uygulamaları için güvenilir testler yazabilir ve uygulamalarınızın kalitesini artırabilirsiniz.</p>
+            </div>
         </div>
     </div>
 
     <button class="scroll-to-top" id="scrollToTop">↑</button>
 
     <script>
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        // Check for saved theme on page load
-        const savedTheme = window.localStorage.getItem('cypress-theme') || 'light';
-        body.setAttribute('data-theme', savedTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            body.setAttribute('data-theme', newTheme);
-            window.localStorage.setItem('cypress-theme', newTheme);
-        });
-
         // Scroll to top button
         window.addEventListener('scroll', function() {
             const scrollToTop = document.getElementById('scrollToTop');
@@ -629,14 +1090,13 @@
                     right: 10px;
                     top: 50%;
                     transform: translateY(-50%);
-                    background: var(--accent-color);
-                    color: var(--text-white);
+                    background: #4A90E2;
+                    color: white;
                     border: none;
                     padding: 5px 10px;
                     border-radius: 4px;
                     cursor: pointer;
                     font-size: 12px;
-                    transition: all 0.3s ease;
                 `;
                 header.style.position = 'relative';
                 header.appendChild(copyBtn);
@@ -650,14 +1110,6 @@
                             copyBtn.innerHTML = '📋 Kopyala';
                         }, 2000);
                     }
-                });
-
-                copyBtn.addEventListener('mouseenter', () => {
-                    copyBtn.style.filter = 'brightness(0.8)';
-                });
-                
-                copyBtn.addEventListener('mouseleave', () => {
-                    copyBtn.style.filter = 'brightness(1)';
                 });
             }
         });
@@ -673,11 +1125,11 @@
                 
                 const originalText = cmd.innerHTML;
                 cmd.innerHTML = '✅ Kopyalandı: ' + text;
-                cmd.style.color = 'var(--success-color)';
+                cmd.style.color = '#00ff00';
                 
                 setTimeout(() => {
                     cmd.innerHTML = originalText;
-                    cmd.style.color = 'var(--terminal-text)';
+                    cmd.style.color = '#00ff00';
                 }, 2000);
             });
         });
@@ -685,15 +1137,32 @@
         // Add hover effect to terminal commands
         document.querySelectorAll('.terminal-cmd').forEach(cmd => {
             cmd.addEventListener('mouseenter', () => {
-                cmd.style.background = 'var(--terminal-bg)';
-                cmd.style.filter = 'brightness(1.1)';
+                cmd.style.background = '#2a2a2a';
             });
             
             cmd.addEventListener('mouseleave', () => {
-                cmd.style.background = 'var(--terminal-bg)';
-                cmd.style.filter = 'brightness(1)';
+                cmd.style.background = '#1a1a1a';
             });
         });
     </script>
+<script>
+// Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Sayfa yüklendiğinde tema durumunu kontrol et
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        
+</script>
 </body>
 </html>
